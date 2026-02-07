@@ -889,59 +889,65 @@ const prevCertSlide = () => {
       </h2>
 
       <p className="text-xl text-warm-gray max-w-3xl mx-auto">
-        Academic foundation and continuous learning through degrees & certifications.
+        Academic foundation and continuous learning through degrees &
+        certifications.
       </p>
     </div>
 
     {/* Cards */}
-    <div className="grid grid-cols-1 gap-8">
+    <div className="space-y-10">
 
       {educationData.map((edu) => (
 
         <Card
           key={edu.id}
-          className="bg-white rounded-2xl shadow-lg overflow-hidden border border-gray-200 hover:shadow-xl transition"
+          className="bg-white rounded-2xl shadow-lg overflow-hidden border border-gray-200"
         >
 
-          {/* Mobile = column | Desktop = grid */}
-          <div className="flex flex-col md:grid md:grid-cols-[1fr_360px]">
+          <div className="grid grid-cols-1 md:grid-cols-[1fr_380px]">
 
             {/* LEFT CONTENT */}
-            <div className="p-6 md:p-8">
+            <div className="p-8">
 
-              <div className="flex items-start mb-4">
+              {/* Title + Date */}
+              <div className="flex items-start justify-between gap-4 mb-4">
 
-                <div className="w-12 h-12 bg-gradient-to-br from-soft-blue to-gold rounded-xl flex items-center justify-center shrink-0">
-                  <GraduationCap className="text-white w-6 h-6" />
+                <div className="flex gap-4">
+
+                  <div className="w-12 h-12 bg-gradient-to-br from-soft-blue to-gold rounded-xl flex items-center justify-center shrink-0">
+                    <GraduationCap className="text-white w-6 h-6" />
+                  </div>
+
+                  <div>
+                    <h3 className="text-xl md:text-2xl font-semibold text-navy leading-snug">
+                      {edu.title}
+                    </h3>
+
+                    <p className="text-soft-blue font-medium text-sm mt-1">
+                      {edu.institution}
+                    </p>
+                  </div>
+
                 </div>
 
-                <div className="ml-4 flex-1">
-
-                  <h3 className="text-lg font-inter font-bold text-navy">
-                    {edu.title}
-                  </h3>
-
-                  <p className="text-soft-blue font-semibold text-sm mt-1">
-                    {edu.institution}
-                  </p>
-
-                </div>
-
-                <span className="bg-gold/10 text-gold px-3 py-1 rounded-full text-xs font-semibold">
+                {/* Date */}
+                <p className="text-warm-gray text-sm font-medium whitespace-nowrap">
                   {edu.year}
-                </span>
+                </p>
 
               </div>
 
-              <p className="text-warm-gray leading-relaxed mb-4 text-sm">
+              {/* Description */}
+              <p className="text-warm-gray leading-relaxed mb-6 text-sm md:text-base">
                 {edu.description}
               </p>
 
+              {/* Tags */}
               <div className="flex flex-wrap gap-2">
                 {edu.tags.map((tag, i) => (
                   <span
                     key={i}
-                    className="bg-navy/10 text-navy px-2 py-1 rounded-full text-xs"
+                    className="bg-navy/10 text-navy px-3 py-1 rounded-full text-xs font-medium"
                   >
                     {tag}
                   </span>
@@ -950,13 +956,15 @@ const prevCertSlide = () => {
 
             </div>
 
-            {/* IMAGE — visible on mobile + desktop */}
-            <div className="h-48 md:h-auto">
+            {/* RIGHT IMAGE — SHOW ON MOBILE TOO */}
+            <div className="block">
+
               <img
                 src={edu.image}
                 alt={edu.institution}
-                className="w-full h-full object-cover rounded-b-2xl md:rounded-none"
+                className="w-full h-56 md:h-full object-cover"
               />
+
             </div>
 
           </div>
@@ -970,6 +978,9 @@ const prevCertSlide = () => {
   </div>
 </section>
 
+
+
+      
       {/* Work Experience Section */}
       <section
         id="experience"
