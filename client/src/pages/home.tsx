@@ -891,7 +891,7 @@ const prevCertSlide = () => {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 gap-8">
+          <div className="flex flex-col md:grid md:grid-cols-[1fr_360px]">
             {educationData.map((edu) => (
               <Card
                 key={edu.id}
