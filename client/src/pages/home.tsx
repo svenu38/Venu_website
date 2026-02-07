@@ -291,7 +291,7 @@ export default function Home() {
         year: "Oct 2021 – Mar 2024",
         description:
           "Focused on data engineering, predictive modeling, and scalable analytics pipelines using Azure Databricks, Synapse Analytics, and PySpark.",
-        image: "/public/unina.jpg",
+        image: "/unina.jpg",
         tags: [
           "Data Engineering",
           "PySpark",
@@ -309,7 +309,7 @@ export default function Home() {
         year: "Aug 2016 – Jul 2019",
         description:
           "Strong foundation in software engineering, algorithms, and machine learning. Final-year project on deep learning–based face mask and social distancing detection.",
-        image: "/public/nitte.jpg",
+        image: "/nitte.jpg",
         tags: [
           "Software Engineering",
           "Deep Learning",
@@ -330,7 +330,7 @@ export default function Home() {
     period: "Dec 2024 – Nov 2025",
     description:
       "Conducting applied research on biometric security, fingerprint liveness detection, and adversarial robustness in deep learning. Leading model development and experimentation for LivDet 2025 and BIOVID 2025 challenges, building end-to-end AI pipelines on Azure using PyTorch, Docker, and CI/CD with GitHub Actions. Collaborating with international research teams and presenting results at ICIAP 2025.",
-    image: "/public/unina.jpg",
+    image: "/unina.jpg",
     tags: [
       "Biometrics",
       "Deepfake Detection",
@@ -350,7 +350,7 @@ export default function Home() {
     period: "Jan 2024 – Dec 2024",
     description:
       "Developed LLM-based chatbot systems for real-world customer support, focusing on prompt engineering, sentiment adaptation, and response evaluation. Designed quantitative NLP metrics for chatbot performance assessment, conducted user studies, and contributed to responsible AI analyses covering privacy, fairness, and regulatory compliance.",
-    image: "/public/fiven.png",
+    image: "/fiven.png",
     tags: [
       "LLMs",
       "Prompt Engineering",
@@ -369,7 +369,7 @@ export default function Home() {
     period: "Jun 2023 – May 2024",
     description:
       "Built scalable ETL pipelines using Azure Data Factory, Synapse Analytics, and Databricks for real-time sensor data ingestion. Developed predictive ML models in PySpark and Azure ML, deployed analytics workflows using Docker and CI/CD pipelines, and delivered Power BI dashboards for operational decision-making.",
-    image: "/public/graded.png",
+    image: "/graded.png",
     tags: [
       "Azure Data Factory",
       "Databricks",
@@ -388,7 +388,7 @@ export default function Home() {
     period: "Aug 2019 – Dec 2021",
     description:
       "Worked on SQL-based data analysis and reporting pipelines, developed Power BI dashboards, and implemented ETL workflows to support business operations and performance optimization.",
-    image: "/public/VA_solutions.png",
+    image: "/VA_solutions.png",
     tags: [
       "SQL",
       "Power BI",
