@@ -876,79 +876,99 @@ const prevCertSlide = () => {
 
 
       {/* Education Section */}
-      <section
-        id="education"
-        className="py-20 bg-white opacity-0 translate-y-5 transition-all duration-700"
-      >
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-inter font-bold text-navy mb-6">
-              Education
-            </h2>
-            <p className="text-xl text-warm-gray max-w-3xl mx-auto">
-              Academic foundation and continuous learning through degrees &
-              certifications.
-            </p>
-          </div>
+<section
+  id="education"
+  className="py-20 bg-white opacity-0 translate-y-5 transition-all duration-700"
+>
+  <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
 
+    {/* Header */}
+    <div className="text-center mb-16">
+      <h2 className="text-4xl md:text-5xl font-inter font-bold text-navy mb-6">
+        Education
+      </h2>
+
+      <p className="text-xl text-warm-gray max-w-3xl mx-auto">
+        Academic foundation and continuous learning through degrees & certifications.
+      </p>
+    </div>
+
+    {/* Cards */}
+    <div className="grid grid-cols-1 gap-8">
+
+      {educationData.map((edu) => (
+
+        <Card
+          key={edu.id}
+          className="bg-white rounded-2xl shadow-lg overflow-hidden border border-gray-200 hover:shadow-xl transition"
+        >
+
+          {/* Mobile = column | Desktop = grid */}
           <div className="flex flex-col md:grid md:grid-cols-[1fr_360px]">
-            {educationData.map((edu) => (
-              <Card
-                key={edu.id}
-                className="card-hover bg-white rounded-2xl shadow-lg overflow-hidden border border-gray-200"
-              >
-                {/* Text left, image right on md+; stacked on mobile */}
-                <div className="grid grid-cols-1 md:grid-cols-[1fr_360px]">
-                  {/* LEFT: text/content */}
-                  <div className="p-6">
-                    <div className="flex items-center mb-4">
-                      <div className="w-12 h-12 bg-gradient-to-br from-soft-blue to-gold rounded-xl flex items-center justify-center">
-                        {edu.type === "degree" ? (
-                          <GraduationCap className="text-white w-6 h-6" />
-                        ) : (
-                          <Award className="text-white w-6 h-6" />
-                        )}
-                      </div>
-                      <div className="ml-4 flex-1">
-                        <h3 className="text-lg font-inter font-bold text-navy">{edu.title}</h3>
-                        <p className="text-soft-blue font-semibold text-sm">{edu.institution}</p>
-                      </div>
-                      <span className="bg-gold/10 text-gold px-3 py-1 rounded-full text-sm font-semibold">
-                        {edu.year}
-                      </span>
-                    </div>
 
-                    <p className="text-warm-gray leading-relaxed mb-4 text-sm">{edu.description}</p>
+            {/* LEFT CONTENT */}
+            <div className="p-6 md:p-8">
 
-                    <div className="flex flex-wrap gap-2">
-                      {edu.tags.map((tag, i) => (
-                        <span
-                          key={i}
-                          className="bg-navy/10 text-navy px-2 py-1 rounded-full text-xs skill-badge"
-                          data-testid={`tag-education-${edu.id}-${i}`}
-                        >
-                          {tag}
-                        </span>
-                      ))}
-                    </div>
-                  </div>
+              <div className="flex items-start mb-4">
 
-                  {/* RIGHT: image (fills the right column height) */}
-                  <div className="hidden md:block">
-                    <img
-                      src={edu.image}
-                      alt={`${edu.institution} campus or related imagery`}
-                      className="w-full h-full object-cover"
-                      data-testid={`img-education-${edu.id}`}
-                    />
-                  </div>
+                <div className="w-12 h-12 bg-gradient-to-br from-soft-blue to-gold rounded-xl flex items-center justify-center shrink-0">
+                  <GraduationCap className="text-white w-6 h-6" />
                 </div>
-              </Card>
 
-            ))}
+                <div className="ml-4 flex-1">
+
+                  <h3 className="text-lg font-inter font-bold text-navy">
+                    {edu.title}
+                  </h3>
+
+                  <p className="text-soft-blue font-semibold text-sm mt-1">
+                    {edu.institution}
+                  </p>
+
+                </div>
+
+                <span className="bg-gold/10 text-gold px-3 py-1 rounded-full text-xs font-semibold">
+                  {edu.year}
+                </span>
+
+              </div>
+
+              <p className="text-warm-gray leading-relaxed mb-4 text-sm">
+                {edu.description}
+              </p>
+
+              <div className="flex flex-wrap gap-2">
+                {edu.tags.map((tag, i) => (
+                  <span
+                    key={i}
+                    className="bg-navy/10 text-navy px-2 py-1 rounded-full text-xs"
+                  >
+                    {tag}
+                  </span>
+                ))}
+              </div>
+
+            </div>
+
+            {/* IMAGE — visible on mobile + desktop */}
+            <div className="h-48 md:h-auto">
+              <img
+                src={edu.image}
+                alt={edu.institution}
+                className="w-full h-full object-cover rounded-b-2xl md:rounded-none"
+              />
+            </div>
+
           </div>
-        </div>
-      </section>
+
+        </Card>
+
+      ))}
+
+    </div>
+
+  </div>
+</section>
 
       {/* Work Experience Section */}
       <section
