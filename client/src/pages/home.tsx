@@ -272,7 +272,7 @@ export default function Home() {
         year: "Oct 2023 – Dec 2024",
         description:
           "Specialized in trustworthy AI, deep learning, and LLM evaluation. Thesis focused on real-world chatbot performance measurement using FACQ metrics, including user studies and ethical AI analysis.",
-        image: "/unina.jpg",
+        image: "client/public/unina.jpg",
         tags: [
           "Machine Learning",
           "Responsible AI",
@@ -291,7 +291,7 @@ export default function Home() {
         year: "Oct 2021 – Mar 2024",
         description:
           "Focused on data engineering, predictive modeling, and scalable analytics pipelines using Azure Databricks, Synapse Analytics, and PySpark.",
-        image: "/unina.jpg",
+        image: "client/public/unina.jpg",
         tags: [
           "Data Engineering",
           "PySpark",
@@ -309,7 +309,7 @@ export default function Home() {
         year: "Aug 2016 – Jul 2019",
         description:
           "Strong foundation in software engineering, algorithms, and machine learning. Final-year project on deep learning–based face mask and social distancing detection.",
-        image: "/nitte.jpg",
+        image: "client/public/nitte.jpg",
         tags: [
           "Software Engineering",
           "Deep Learning",
