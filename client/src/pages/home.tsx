@@ -272,7 +272,7 @@ export default function Home() {
         year: "Oct 2023 – Dec 2024",
         description:
           "Specialized in trustworthy AI, deep learning, and LLM evaluation. Thesis focused on real-world chatbot performance measurement using FACQ metrics, including user studies and ethical AI analysis.",
-        image: "/public/unina.jpg",
+        image: "/unina.jpg",
         tags: [
           "Machine Learning",
           "Responsible AI",
