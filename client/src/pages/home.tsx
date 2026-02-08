@@ -692,20 +692,20 @@ const prevCertSlide = () => {
 
   return (
     <div className="min-h-screen bg-gray-50">
-      {/* Navigation */}
-<nav className="fixed top-4 left-0 right-0 z-50 px-4">
+      {/* Navigation — Organization Style */}
+<header className="fixed top-0 left-0 right-0 z-50 bg-white/90 backdrop-blur border-b border-slate-200">
 
-  <div className="max-w-6xl mx-auto">
+  <div className="max-w-7xl mx-auto px-6">
 
-    <div className="bg-white/80 backdrop-blur-xl border border-white/30 shadow-lg rounded-full px-6 py-3 flex items-center justify-between">
+    <div className="flex items-center justify-between h-16">
 
       {/* Brand */}
-      <div className="font-inter font-bold text-navy text-lg">
+      <div className="text-lg font-semibold text-slate-900">
         Venu Govindaraju
       </div>
 
-      {/* Desktop Nav */}
-      <div className="hidden md:flex items-center gap-8 text-sm font-medium">
+      {/* Desktop Navigation */}
+      <nav className="hidden md:flex items-center space-x-10 text-sm font-medium text-slate-600">
 
         {[
           ["Home", "#home"],
@@ -714,14 +714,54 @@ const prevCertSlide = () => {
           ["Projects", "#projects"],
           ["Skills", "#skills"],
           ["Certifications", "#certifications"],
-          ["Interests", "#interests"],
           ["Contact", "#contact"],
         ].map(([label, link]) => (
 
           <a
             key={label}
             href={link}
-            className="relative text-slate-600 hover:text-navy transition after:absolute after:-bottom-1 after:left-0 after:h-[2px] after:w-0 after:bg-gold after:transition-all hover:after:w-full"
+            className="hover:text-slate-900 transition"
+          >
+            {label}
+          </a>
+
+        ))}
+
+      </nav>
+
+      {/* Mobile Menu Button */}
+      <button
+        className="md:hidden text-slate-700"
+        onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+      >
+        {isMobileMenuOpen ? <X /> : <Menu />}
+      </button>
+
+    </div>
+
+  </div>
+
+  {/* Mobile Navigation */}
+  {isMobileMenuOpen && (
+    <div className="md:hidden bg-white border-t border-slate-200">
+
+      <div className="px-6 py-4 space-y-4 text-sm font-medium text-slate-700">
+
+        {[
+          ["Home", "#home"],
+          ["Education", "#education"],
+          ["Experience", "#experience"],
+          ["Projects", "#projects"],
+          ["Skills", "#skills"],
+          ["Certifications", "#certifications"],
+          ["Contact", "#contact"],
+        ].map(([label, link]) => (
+
+          <a
+            key={label}
+            href={link}
+            onClick={() => setIsMobileMenuOpen(false)}
+            className="block hover:text-slate-900 transition"
           >
             {label}
           </a>
@@ -730,53 +770,14 @@ const prevCertSlide = () => {
 
       </div>
 
-      {/* Mobile Button */}
-      <button
-        className="md:hidden text-navy"
-        onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-      >
-        {isMobileMenuOpen ? <X /> : <Menu />}
-      </button>
-
     </div>
+  )}
 
-    {/* Mobile Menu */}
-    {isMobileMenuOpen && (
-      <div className="mt-3 bg-white/90 backdrop-blur-xl rounded-2xl shadow-xl border border-gray-200 p-6 md:hidden">
+</header>
 
-        <div className="flex flex-col gap-4 text-sm font-medium">
+{/* Spacer for fixed header */}
+<div className="h-16" aria-hidden />
 
-          {[
-            ["Home", "#home"],
-            ["Education", "#education"],
-            ["Experience", "#experience"],
-            ["Projects", "#projects"],
-            ["Skills", "#skills"],
-            ["Certifications", "#certifications"],
-            ["Interests", "#interests"],
-            ["Contact", "#contact"],
-          ].map(([label, link]) => (
-
-            <a
-              key={label}
-              href={link}
-              onClick={() => setIsMobileMenuOpen(false)}
-              className="text-slate-700 hover:text-navy transition"
-            >
-              {label}
-            </a>
-
-          ))}
-
-        </div>
-      </div>
-    )}
-
-  </div>
-</nav>
-
-{/* Spacer */}
-<div className="h-24" aria-hidden />
 
     {/* Hero — Organization Style */}
 <section
