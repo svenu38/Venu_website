@@ -65,6 +65,8 @@ export default function Home() {
   const [currentProjectIndex, setCurrentProjectIndex] = useState(0);
   const [currentCertIndex, setCurrentCertIndex] = useState(0);
   const [showMoreEducation, setShowMoreEducation] = useState(false);
+  const [showAllProjects, setShowAllProjects] = useState(false);
+
   const { toast } = useToast();
 
 
@@ -983,135 +985,373 @@ const prevCertSlide = () => {
 
 
       
-      {/* Experience — Engineering Career Narrative */}
+                {/* Experience — Engineering Career Narrative */}
+          <motion.section
+            id="experience"
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+            className="py-32 bg-gradient-to-b from-gray-50 to-white"
+          >
+
+            <div className="max-w-6xl mx-auto px-6">
+
+            {/* Experience Header */}
+            <div className="text-center max-w-4xl mx-auto mb-28">
+
+                <motion.h2
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.6 }}
+                  className="text-5xl font-bold tracking-tight text-slate-900 mb-6"
+                >
+                  Professional Experience
+                </motion.h2>
+
+                <motion.p
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.6, delay: 0.15 }}
+                  className="text-lg text-slate-600 leading-relaxed"
+                >
+                  Applied AI researcher and machine learning engineer with hands-on experience building biometric security systems,
+                  LLM-based applications, and cloud-native data pipelines across academic and industrial environments.
+                </motion.p>
+
+            </div>
+
+            {/* Career Timeline */}
+            <div className="relative border-l border-slate-200 pl-12 space-y-32">
+
+            {workExperienceData.map((work, i) => (
+
+            <motion.div
+            key={work.id}
+            initial={{ opacity: 0, y: 40 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: i * 0.15 }}
+            className="relative"
+            >
+
+            {/* Timeline Node */}
+            <div className={`absolute -left-[14px] top-6 w-7 h-7 rounded-full border-4 border-white shadow-lg ${
+            work.type === "current" ? "bg-emerald-500" : "bg-slate-400"
+            }`} />
+
+            <div className="grid md:grid-cols-[160px_1fr] gap-14">
+
+            {/* Period */}
+            <div className="text-sm text-slate-500 font-medium pt-2">
+            {work.period}
+            </div>
+
+            {/* Main Content */}
+            <div>
+
+            {/* Role Header */}
+            <div className="mb-6">
+
+            <h3 className="text-2xl font-semibold text-slate-900">
+            {work.title}
+            </h3>
+
+            <p className="text-blue-600 font-medium">
+            {work.company}
+            </p>
+
+            </div>
+
+            {/* Role Description */}
+            <p className="text-slate-700 leading-relaxed max-w-3xl mb-8">
+            {work.description}
+            </p>
+
+            {/* Key Contributions */}
+            <div className="mb-8">
+
+            <h4 className="text-sm uppercase tracking-wide text-slate-500 mb-3">
+            Key Contributions
+            </h4>
+
+            <ul className="space-y-2 text-slate-700 list-disc list-inside">
+
+            <li>Designed and deployed end-to-end ML pipelines supporting real-world biometric authentication systems.</li>
+            <li>Led experimentation on adversarial robustness and fingerprint liveness detection models.</li>
+            <li>Built scalable cloud workflows using Azure ML, Docker, and CI/CD automation.</li>
+            <li>Collaborated with cross-functional research teams and contributed to international benchmarks.</li>
+
+            </ul>
+
+            </div>
+
+            {/* Technology Stack */}
+            <div>
+
+            <h4 className="text-sm uppercase tracking-wide text-slate-500 mb-3">
+            Technology Stack
+            </h4>
+
+            <div className="flex flex-wrap gap-2">
+
+            {work.tags.map((tag, idx) => (
+
+            <span
+            key={idx}
+            className="px-3 py-1 text-sm border border-slate-200 rounded-md text-slate-600 bg-slate-50"
+            >
+
+            {tag}
+
+            </span>
+
+            ))}
+
+            </div>
+
+            </div>
+
+            </div>
+
+            </div>
+
+            </motion.div>
+
+            ))}
+
+            </div>
+
+            </div>
+
+          </motion.section>
+
+    {/* Projects — Scalable Professional Layout */}
+    <motion.section
+      id="projects"
+      initial={{ opacity: 0 }}
+      whileInView={{ opacity: 1 }}
+      viewport={{ once: true }}
+      className="py-32 bg-white"
+    >
+
+    <div className="max-w-7xl mx-auto px-6">
+
+    {/* Header */}
+    <div className="text-center max-w-4xl mx-auto mb-20">
+
+    <h2 className="text-5xl font-bold tracking-tight text-slate-900 mb-6">
+    Selected Projects
+    </h2>
+
+    <p className="text-lg text-slate-600">
+    A curated selection of applied AI, biometric security, and data engineering projects.
+    </p>
+
+    </div>
+
+    {/* Grid */}
+    <div className="grid md:grid-cols-2 gap-10">
+
+    {projectsData
+    .slice(0, showAllProjects ? projectsData.length : 4)
+    .map((project, index) => (
+
+    <motion.div
+    key={project.id}
+    initial={{ opacity: 0, y: 30 }}
+    whileInView={{ opacity: 1, y: 0 }}
+    viewport={{ once: true }}
+    transition={{ delay: index * 0.08 }}
+    whileHover={{ scale: 1.02 }}
+    className="bg-white rounded-2xl border border-slate-200 shadow-lg overflow-hidden"
+    >
+
+    <div className="h-48 overflow-hidden">
+    <img
+    src={project.image}
+    className="w-full h-full object-cover"
+    />
+    </div>
+
+    <div className="p-8">
+
+    <h3 className="text-xl font-semibold text-slate-900 mb-1">
+    {project.title}
+    </h3>
+
+    <p className="text-blue-600 font-medium mb-3">
+    {project.company}
+    </p>
+
+    <p className="text-slate-600 mb-4">
+    {project.description}
+    </p>
+
+    <div className="flex flex-wrap gap-2 mb-4">
+
+    {project.tags.slice(0,4).map((tag, idx) => (
+
+    <span
+    key={idx}
+    className="px-3 py-1 text-xs border border-slate-200 rounded-md text-slate-600"
+    >
+    {tag}
+    </span>
+
+    ))}
+
+    </div>
+
+    {project.link && (
+    <a
+    href={project.link}
+    target="_blank"
+    className="text-blue-600 font-medium hover:underline"
+    >
+    View Project →
+    </a>
+    )}
+
+    </div>
+
+    </motion.div>
+
+    ))}
+
+    </div>
+
+    {/* Load More */}
+    <div className="text-center mt-12">
+
+    <button
+    onClick={() => setShowAllProjects(!showAllProjects)}
+    className="px-8 py-3 border border-slate-300 rounded-full text-slate-700 hover:bg-slate-50 transition"
+    >
+
+    {showAllProjects ? "Show Less" : "View All Projects"}
+
+    </button>
+
+    </div>
+
+    </div>
+
+    </motion.section>
+
+      {/* Skills — Professional Competency Matrix */}
 <motion.section
-  id="experience"
+  id="skills"
   initial={{ opacity: 0 }}
   whileInView={{ opacity: 1 }}
   viewport={{ once: true }}
-  className="py-32 bg-gradient-to-b from-gray-50 to-white"
+  className="py-32 bg-gray-50"
 >
 
-<div className="max-w-6xl mx-auto px-6">
+<div className="max-w-7xl mx-auto px-6">
 
-{/* Experience Header */}
-<div className="text-center max-w-4xl mx-auto mb-28">
+{/* Header */}
+<div className="text-center max-w-4xl mx-auto mb-24">
 
-  <motion.h2
-    initial={{ opacity: 0, y: 20 }}
-    whileInView={{ opacity: 1, y: 0 }}
-    viewport={{ once: true }}
-    transition={{ duration: 0.6 }}
-    className="text-5xl font-bold tracking-tight text-slate-900 mb-6"
-  >
-    Professional Experience
-  </motion.h2>
+<motion.h2
+initial={{ opacity: 0, y: 20 }}
+whileInView={{ opacity: 1, y: 0 }}
+viewport={{ once: true }}
+className="text-5xl font-bold tracking-tight text-slate-900 mb-6"
+>
+Core Technical Skills
+</motion.h2>
 
-  <motion.p
-    initial={{ opacity: 0, y: 20 }}
-    whileInView={{ opacity: 1, y: 0 }}
-    viewport={{ once: true }}
-    transition={{ duration: 0.6, delay: 0.15 }}
-    className="text-lg text-slate-600 leading-relaxed"
-  >
-    Applied AI researcher and machine learning engineer with hands-on experience building biometric security systems,
-    LLM-based applications, and cloud-native data pipelines across academic and industrial environments.
-  </motion.p>
+<motion.p
+initial={{ opacity: 0, y: 20 }}
+whileInView={{ opacity: 1, y: 0 }}
+viewport={{ once: true }}
+transition={{ delay: 0.15 }}
+className="text-lg text-slate-600 leading-relaxed"
+>
+Expertise across applied machine learning, biometric AI research, cloud-native data engineering, and responsible AI systems.
+</motion.p>
 
 </div>
 
-{/* Career Timeline */}
-<div className="relative border-l border-slate-200 pl-12 space-y-32">
+{/* Skill Domains */}
+<div className="grid md:grid-cols-2 gap-12">
 
-{workExperienceData.map((work, i) => (
+{[
+{
+title: "Programming & ML Frameworks",
+skills: ["Python","SQL","R","PySpark","TensorFlow","PyTorch","Scikit-learn","NumPy","Pandas","OpenCV"]
+},
+
+{
+title: "Machine Learning & Deep Learning",
+skills: ["Supervised Learning","Unsupervised Learning","CNNs","Transfer Learning","Multimodal Learning","Adversarial Training","Model Evaluation"]
+},
+
+{
+title: "NLP & Large Language Models",
+skills: ["LLMs","Prompt Engineering","Zero-shot Learning","Few-shot Learning","Sentiment Analysis","Conversational AI","Chatbot Evaluation"]
+},
+
+{
+title: "Data Engineering & ETL",
+skills: ["Azure Data Factory","Azure Synapse","Azure Databricks","Apache Airflow","SSIS","Talend","Data Modeling","ETL Automation"]
+},
+
+{
+title: "Cloud & DevOps",
+skills: ["Microsoft Azure","AWS","GCP","Docker","Kubernetes","GitHub Actions","Jenkins","CI/CD Pipelines"]
+},
+
+{
+title: "Visualization & Databases",
+skills: ["Power BI","Tableau","PostgreSQL","MySQL","MongoDB","Cassandra","Azure SQL","Star/Snowflake Schema"]
+},
+
+{
+title: "Responsible AI & Research",
+skills: ["AI Ethics","Privacy & Fairness","Regulatory Compliance","Human-Centered AI","User Studies","Experimental Design","Quantitative Evaluation"]
+},
+
+{
+title: "Tools & Collaboration",
+skills: ["Git","Linux","Jupyter","VS Code","Technical Documentation","Research Communication","Cross-functional Collaboration","Project Presentation"]
+}
+
+].map((group, idx) => (
 
 <motion.div
-key={work.id}
+key={idx}
 initial={{ opacity: 0, y: 40 }}
 whileInView={{ opacity: 1, y: 0 }}
 viewport={{ once: true }}
-transition={{ duration: 0.6, delay: i * 0.15 }}
-className="relative"
+transition={{ delay: idx * 0.12 }}
+whileHover={{ scale: 1.02 }}
+className="bg-white rounded-3xl border border-slate-200 shadow-xl p-10"
 >
 
-{/* Timeline Node */}
-<div className={`absolute -left-[14px] top-6 w-7 h-7 rounded-full border-4 border-white shadow-lg ${
-work.type === "current" ? "bg-emerald-500" : "bg-slate-400"
-}`} />
-
-<div className="grid md:grid-cols-[160px_1fr] gap-14">
-
-{/* Period */}
-<div className="text-sm text-slate-500 font-medium pt-2">
-{work.period}
-</div>
-
-{/* Main Content */}
-<div>
-
-{/* Role Header */}
-<div className="mb-6">
-
-<h3 className="text-2xl font-semibold text-slate-900">
-{work.title}
+<h3 className="text-xl font-semibold text-slate-900 mb-6">
+{group.title}
 </h3>
 
-<p className="text-blue-600 font-medium">
-{work.company}
-</p>
+<div className="grid grid-cols-2 gap-y-3 gap-x-6">
 
-</div>
+{group.skills.map((skill, i) => (
 
-{/* Role Description */}
-<p className="text-slate-700 leading-relaxed max-w-3xl mb-8">
-{work.description}
-</p>
-
-{/* Key Contributions */}
-<div className="mb-8">
-
-<h4 className="text-sm uppercase tracking-wide text-slate-500 mb-3">
-Key Contributions
-</h4>
-
-<ul className="space-y-2 text-slate-700 list-disc list-inside">
-
-<li>Designed and deployed end-to-end ML pipelines supporting real-world biometric authentication systems.</li>
-<li>Led experimentation on adversarial robustness and fingerprint liveness detection models.</li>
-<li>Built scalable cloud workflows using Azure ML, Docker, and CI/CD automation.</li>
-<li>Collaborated with cross-functional research teams and contributed to international benchmarks.</li>
-
-</ul>
-
-</div>
-
-{/* Technology Stack */}
-<div>
-
-<h4 className="text-sm uppercase tracking-wide text-slate-500 mb-3">
-Technology Stack
-</h4>
-
-<div className="flex flex-wrap gap-2">
-
-{work.tags.map((tag, idx) => (
-
-<span
-key={idx}
-className="px-3 py-1 text-sm border border-slate-200 rounded-md text-slate-600 bg-slate-50"
+<motion.div
+key={i}
+whileHover={{ x: 4 }}
+className="flex items-center text-slate-700 text-sm"
 >
 
-{tag}
+<span className="w-2 h-2 bg-blue-600 rounded-full mr-3" />
 
-</span>
+{skill}
+
+</motion.div>
 
 ))}
-
-</div>
-
-</div>
-
-</div>
 
 </div>
 
@@ -1125,542 +1365,361 @@ className="px-3 py-1 text-sm border border-slate-200 rounded-md text-slate-600 b
 
 </motion.section>
 
-      {/* Projects Section - Carousel */}
-      <section
-        id="projects"
-        className="py-20 professional-gradient opacity-0 translate-y-5 transition-all duration-700 relative overflow-hidden"
+{/* Certifications — Executive Credential Showcase */}
+<motion.section
+  id="certifications"
+  initial={{ opacity: 0 }}
+  whileInView={{ opacity: 1 }}
+  viewport={{ once: true }}
+  className="py-32 bg-gradient-to-b from-gray-50 to-white"
+>
+
+<div className="max-w-7xl mx-auto px-6">
+
+{/* Header */}
+<div className="text-center max-w-4xl mx-auto mb-24">
+
+<motion.h2
+initial={{ opacity: 0, y: 20 }}
+whileInView={{ opacity: 1, y: 0 }}
+viewport={{ once: true }}
+className="text-5xl font-bold tracking-tight text-slate-900 mb-6"
+>
+Professional Certifications
+</motion.h2>
+
+<motion.p
+initial={{ opacity: 0, y: 20 }}
+whileInView={{ opacity: 1, y: 0 }}
+viewport={{ once: true }}
+transition={{ delay: 0.15 }}
+className="text-lg text-slate-600 leading-relaxed"
+>
+Validated expertise across cloud platforms, machine learning pipelines, and production-grade AI systems.
+</motion.p>
+
+</div>
+
+{/* Credentials */}
+<div className="grid md:grid-cols-2 gap-12">
+
+{certifications.map((cert, idx) => (
+
+<motion.div
+key={idx}
+initial={{ opacity: 0, y: 40 }}
+whileInView={{ opacity: 1, y: 0 }}
+viewport={{ once: true }}
+transition={{ delay: idx * 0.12 }}
+whileHover={{ scale: 1.03 }}
+className="group bg-white rounded-3xl border border-slate-200 shadow-xl p-10 relative overflow-hidden"
+>
+
+{/* Accent Bar */}
+<div className="absolute left-0 top-0 h-full w-1 bg-blue-600 opacity-0 group-hover:opacity-100 transition" />
+
+{/* Content */}
+<h3 className="text-xl font-semibold text-slate-900 mb-2">
+{cert.title}
+</h3>
+
+<p className="text-blue-600 font-medium mb-6">
+{cert.issuer}
+</p>
+
+<div className="flex items-center justify-between">
+
+<span className="text-sm text-slate-500">
+Credential Verified
+</span>
+
+<a
+href={cert.pdf}
+target="_blank"
+rel="noopener noreferrer"
+className="inline-flex items-center text-blue-600 font-medium hover:underline"
+>
+View Certificate →
+</a>
+
+</div>
+
+</motion.div>
+
+))}
+
+</div>
+
+</div>
+
+</motion.section>
+
+
+{/* Professional Focus */}
+<motion.section
+  id="interests"
+  initial={{ opacity: 0 }}
+  whileInView={{ opacity: 1 }}
+  viewport={{ once: true }}
+  className="py-32 bg-white"
+>
+
+<div className="max-w-6xl mx-auto px-6">
+
+{/* Header */}
+<div className="text-center max-w-4xl mx-auto mb-24">
+
+<motion.h2
+initial={{ opacity: 0, y: 20 }}
+whileInView={{ opacity: 1, y: 0 }}
+viewport={{ once: true }}
+className="text-5xl font-bold tracking-tight text-slate-900 mb-6"
+>
+Professional Focus
+</motion.h2>
+
+<p className="text-lg text-slate-600 leading-relaxed">
+Areas of continuous development aligned with research excellence and engineering leadership.
+</p>
+
+</div>
+
+{/* Focus Grid */}
+<div className="grid md:grid-cols-3 gap-12">
+
+{[
+{
+title: "AI Research",
+description: "Biometric security, adversarial machine learning, and trustworthy AI systems."
+},
+{
+title: "Cloud Engineering",
+description: "Designing scalable ML pipelines and MLOps workflows for production environments."
+},
+{
+title: "Scientific Learning",
+description: "Keeping pace with current research in computer vision and deep learning."
+},
+{
+title: "Technical Mentorship",
+description: "Supporting junior engineers and students entering applied AI."
+},
+{
+title: "Systems Thinking",
+description: "Bridging research with production-grade engineering practices."
+},
+{
+title: "Wellbeing & Balance",
+description: "Maintaining performance through fitness, travel, and continuous self-improvement."
+}
+
+].map((item, idx) => (
+
+<motion.div
+key={idx}
+initial={{ opacity: 0, y: 30 }}
+whileInView={{ opacity: 1, y: 0 }}
+viewport={{ once: true }}
+transition={{ delay: idx * 0.1 }}
+className="bg-gray-50 border border-slate-200 rounded-2xl p-8"
+>
+
+<h3 className="text-xl font-semibold text-slate-900 mb-3">
+{item.title}
+</h3>
+
+<p className="text-slate-600 leading-relaxed">
+{item.description}
+</p>
+
+</motion.div>
+
+))}
+
+</div>
+
+</div>
+
+</motion.section>
+
+
+
+{/* Contact — Organizational Layout */}
+<motion.section
+  id="contact"
+  initial={{ opacity: 0 }}
+  whileInView={{ opacity: 1 }}
+  viewport={{ once: true }}
+  className="py-32 bg-gray-50"
+>
+
+  <div className="max-w-6xl mx-auto px-6">
+
+    {/* Header */}
+    <div className="text-center max-w-4xl mx-auto mb-24">
+
+      <motion.h2
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        className="text-5xl font-bold tracking-tight text-slate-900 mb-6"
       >
-        <div className="absolute inset-0 bg-gradient-to-br from-white/10 via-transparent to-white/5"></div>
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-inter font-bold text-white mb-6">
-              Featured Projects
-            </h2>
-            <p className="text-xl text-white/90 max-w-3xl mx-auto">
-              Showcasing impactful products and strategic initiatives that drive
-              business transformation and innovation.
-            </p>
-          </div>
+        Get in Touch
+      </motion.h2>
 
-          {/* Projects Carousel */}
-          <div className="relative mb-12">
-            <div className="overflow-hidden rounded-2xl">
-              <div
-                className="flex transition-transform duration-500 ease-in-out"
-                style={{
-                  transform: `translateX(-${currentProjectIndex * 100}%)`,
-                }}
-              >
-                {projectsData.map((project) => (
-                  <div key={project.id} className="w-full flex-shrink-0">
-                    <Card className="mx-4 education-card rounded-2xl shadow-2xl overflow-hidden border border-white/30 h-full backdrop-blur-sm">
-                      <div className="md:flex">
-                        <div className="md:w-2/5">
-                          <img
-                            src={project.image}
-                            alt={`${project.title} project visualization`}
-                            className="w-full h-64 md:h-full object-cover"
-                            data-testid={`img-project-${project.id}`}
-                          />
-                        </div>
-                        <div className="md:w-3/5 p-8">
-                          <div className="flex items-start justify-between mb-4">
-                            <div>
-                              <h3 className="text-3xl font-inter font-bold text-navy mb-3">
-                                {project.link ? (
-                                  <a
-                                    href={project.link}
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    className="hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-azure"
-                                    aria-label={`Open project: ${project.title}`}
-                                    data-testid={`link-project-${project.id}`}
-                                    title={project.title}
-                                  >
-                                    {project.title}
-                                  </a>
-                                ) : (
-                                  project.title
-                                )}
-                              </h3>
+      <p className="text-lg text-slate-600 leading-relaxed">
+        Open to collaboration, research partnerships, and professional opportunities in applied AI,
+        machine learning, and cloud-native engineering.
+      </p>
 
-                              <p className="text-soft-blue font-semibold text-lg mb-2">
-                                {project.company}
-                              </p>
-                              <div className="bg-gold/20 text-gold px-3 py-1 rounded-full text-sm font-semibold inline-block">
-                                {project.impact}
-                              </div>
-                            </div>
-                          </div>
-
-                          <p className="text-warm-gray leading-relaxed mb-6 text-lg">
-                            {project.description}
-                          </p>
-
-                          <div className="flex flex-wrap gap-3">
-                            {project.tags.map((tag, tagIndex) => (
-                              <span
-                                key={tagIndex}
-                                className="bg-navy/10 text-navy px-4 py-2 rounded-full text-sm skill-badge font-medium"
-                                data-testid={`tag-project-${project.id}-${tagIndex}`}
-                              >
-                                {tag}
-                              </span>
-                            ))}
-                          </div>
-                        </div>
-                      </div>
-                    </Card>
-                  </div>
-                ))}
-              </div>
-            </div>
-
-            {/* Navigation Arrows */}
-            <button
-              onClick={prevProjectSlide}
-              className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-4 glass-effect rounded-full p-3 shadow-lg hover:shadow-xl transition-all border border-white/30 hover:border-white/50"
-              data-testid="button-project-prev"
-            >
-              <ChevronLeft className="w-6 h-6 text-white" />
-            </button>
-
-            <button
-              onClick={nextProjectSlide}
-              className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-4 glass-effect rounded-full p-3 shadow-lg hover:shadow-xl transition-all border border-white/30 hover:border-white/50"
-              data-testid="button-project-next"
-            >
-              <ChevronRight className="w-6 h-6 text-white" />
-            </button>
-
-            {/* Dots Indicator */}
-            <div className="flex justify-center mt-6 space-x-2">
-              {projectsData.map((_, index) => (
-                <button
-                  key={index}
-                  onClick={() => setCurrentProjectIndex(index)}
-                  className={`w-3 h-3 rounded-full transition-all ${index === currentProjectIndex
-                    ? "bg-white scale-110 shadow-lg"
-                    : "bg-white/50 hover:bg-white/70"
-                    }`}
-                  data-testid={`dot-project-${index}`}
-                />
-              ))}
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Skills Section */}
-      <section id="skills" className="py-24 bg-gray-50">
-        <div className="max-w-7xl mx-auto px-6">
-
-          {/* Header */}
-          <div className="mb-16 max-w-3xl">
-            <span className="text-blue-600 font-semibold uppercase tracking-wide">
-              Skills
-            </span>
-
-            <h2 className="text-4xl font-bold text-slate-900 mt-2 mb-4">
-              Core Technical Skills
-            </h2>
-
-            <p className="text-lg text-slate-600">
-              A comprehensive overview of my technical expertise across AI research,
-              machine learning, data engineering, and cloud-native systems.
-            </p>
-          </div>
-
-          {/* Skill Groups */}
-          <div className="grid md:grid-cols-2 gap-8">
-
-            {[
-              {
-                title: "Programming & Frameworks",
-                skills: [
-                  ["Python","https://www.python.org/"],
-                  ["SQL","https://www.mysql.com/"],
-                  ["R","https://www.r-project.org/"],
-                  ["PySpark","https://spark.apache.org/"],
-                  ["TensorFlow","https://www.tensorflow.org/"],
-                  ["PyTorch","https://pytorch.org/"],
-                  ["Scikit-learn","https://scikit-learn.org/"],
-                  ["NumPy","https://numpy.org/"],
-                  ["Pandas","https://pandas.pydata.org/"],
-                  ["OpenCV","https://opencv.org/"]
-                ]
-              },
-
-              {
-                title: "Machine Learning & Deep Learning",
-                skills: [
-                  ["Supervised Learning"],
-                  ["Unsupervised Learning"],
-                  ["CNNs"],
-                  ["Transfer Learning"],
-                  ["Multimodal Learning"],
-                  ["Adversarial Training"],
-                  ["Model Evaluation"]
-                ]
-              },
-
-              {
-                title: "NLP & Large Language Models",
-                skills: [
-                  ["LLMs"],
-                  ["Prompt Engineering"],
-                  ["Zero-shot Learning"],
-                  ["Few-shot Learning"],
-                  ["Sentiment Analysis"],
-                  ["Conversational AI"],
-                  ["Chatbot Evaluation"]
-                ]
-              },
-
-              {
-                title: "Data Engineering & ETL",
-                skills: [
-                  ["Azure Data Factory"],
-                  ["Azure Synapse"],
-                  ["Azure Databricks"],
-                  ["Apache Airflow"],
-                  ["SSIS"],
-                  ["Talend"],
-                  ["Data Modeling"],
-                  ["ETL Automation"]
-                ]
-              },
-
-              {
-                title: "Cloud & DevOps",
-                skills: [
-                  ["Microsoft Azure"],
-                  ["AWS"],
-                  ["GCP"],
-                  ["Docker"],
-                  ["Kubernetes"],
-                  ["GitHub Actions"],
-                  ["Jenkins"],
-                  ["CI/CD Pipelines"]
-                ]
-              },
-
-              {
-                title: "Visualization & Databases",
-                skills: [
-                  ["Power BI"],
-                  ["Tableau"],
-                  ["PostgreSQL"],
-                  ["MySQL"],
-                  ["MongoDB"],
-                  ["Cassandra"],
-                  ["Azure SQL"],
-                  ["Star/Snowflake Schema"]
-                ]
-              },
-
-              {
-                title: "Responsible AI & Research",
-                skills: [
-                  ["AI Ethics"],
-                  ["Privacy & Fairness"],
-                  ["Regulatory Compliance"],
-                  ["Human-Centered AI"],
-                  ["User Studies"],
-                  ["Experimental Design"],
-                  ["Quantitative Evaluation"]
-                ]
-              },
-
-              {
-                title: "Tools & Collaboration",
-                skills: [
-                  ["Git"],
-                  ["Linux"],
-                  ["Jupyter"],
-                  ["VS Code"],
-                  ["Technical Documentation"],
-                  ["Research Communication"],
-                  ["Cross-functional Collaboration"],
-                  ["Project Presentation"]
-                ]
-              }
-
-            ].map((group, idx) => (
-
-              <div key={idx} className="bg-white border border-slate-200 rounded-2xl p-8 hover:shadow-md transition">
-
-                <h3 className="text-xl font-semibold text-slate-900 mb-6">
-                  {group.title}
-                </h3>
-
-                <div className="flex flex-wrap gap-3">
-                  {group.skills.map((skill, i) => (
-                    <a
-                      key={i}
-                      href={skill[1] || "#"}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="px-4 py-2 text-sm rounded-full bg-slate-100 text-slate-700 hover:bg-blue-600 hover:text-white transition"
-                    >
-                      {skill[0]}
-                    </a>
-                  ))}
-                </div>
-
-              </div>
-            ))}
-
-          </div>
-        </div>
-      </section>
-
-
-      <section
-        id="certifications"
-        className="py-20 professional-gradient relative overflow-hidden"
-      >
-        <div className="absolute inset-0 bg-gradient-to-br from-white/10 via-transparent to-white/5" />
-
-        <div className="max-w-6xl mx-auto px-4 relative z-10">
-
-          <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-inter font-bold text-white mb-6">
-              Professional Certifications
-            </h2>
-
-            <p className="text-xl text-white/90 max-w-3xl mx-auto">
-              Industry-recognized credentials validating expertise in cloud, ML, and production AI systems.
-            </p>
-          </div>
-
-          {/* Carousel */}
-          <div className="relative">
-
-            <div className="overflow-hidden rounded-2xl">
-              <div
-                className="flex transition-transform duration-500 ease-in-out"
-                style={{ transform: `translateX(-${currentCertIndex * 100}%)` }}
-              >
-
-                {certifications.map((cert, idx) => (
-
-                  <div key={idx} className="w-full flex-shrink-0 px-4">
-
-                    <Card className="rounded-2xl shadow-2xl border border-white/30 bg-white">
-
-                      <div className="md:flex">
-
-                        {/* PDF Preview */}
-                        <div className="md:w-1/2 h-[420px]">
-
-                          <iframe
-                            src={`${cert.pdf}#zoom=page-fit`}
-                            className="w-full h-full"
-                          />
-
-                        </div>
-
-                        {/* Content */}
-                        <div className="md:w-1/2 p-8">
-
-                          <h3 className="text-2xl font-bold text-navy mb-3">
-                            {cert.title}
-                          </h3>
-
-                          <p className="text-soft-blue font-semibold mb-6">
-                            {cert.issuer}
-                          </p>
-
-                          <a
-                            href={cert.pdf}
-                            target="_blank"
-                            className="inline-flex items-center bg-gold text-navy px-6 py-3 rounded-lg font-semibold hover:bg-gold/90 transition"
-                          >
-                            Open Full Certificate →
-                          </a>
-
-                        </div>
-
-                      </div>
-
-                    </Card>
-
-                  </div>
-
-                ))}
-
-              </div>
-            </div>
-
-            {/* Arrows */}
-            <button
-              onClick={prevCertSlide}
-              className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-4 glass-effect rounded-full p-3"
-            >
-              <ChevronLeft className="w-6 h-6 text-white" />
-            </button>
-
-            <button
-              onClick={nextCertSlide}
-              className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-4 glass-effect rounded-full p-3"
-            >
-              <ChevronRight className="w-6 h-6 text-white" />
-            </button>
-
-            {/* Dots */}
-            <div className="flex justify-center mt-6 space-x-2">
-              {certifications.map((_, i) => (
-                <button
-                  key={i}
-                  onClick={() => setCurrentCertIndex(i)}
-                  className={`w-3 h-3 rounded-full ${
-                    i === currentCertIndex ? "bg-white" : "bg-white/50"
-                  }`}
-                />
-              ))}
-            </div>
-
-          </div>
-
-        </div>
-      </section>
-
-
-      {/* Interests Section */}
-      <section
-        id="interests"
-        className="py-20 bg-gray-50 opacity-0 translate-y-5 transition-all duration-700"
-      >
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-inter font-bold text-navy mb-6">
-              Beyond Work
-            </h2>
-            <p className="text-xl text-warm-gray max-w-3xl mx-auto">
-              Personal interests that support balance, curiosity, and continuous growth alongside research and engineering.
-            </p>
-          </div>
-
-          <div className="grid md:grid-cols-3 gap-8">
-            {interests.map((interest, index) => (
-              <Card
-                key={index}
-                className="card-hover bg-white p-8 rounded-2xl shadow-lg text-center border border-gray-200"
-              >
-                <CardContent className="p-0">
-                  <div
-                    className={`w-16 h-16 bg-gradient-to-br ${interest.color} rounded-full flex items-center justify-center mx-auto mb-6`}
-                  >
-                    <interest.icon className="text-white w-6 h-6" />
-                  </div>
-                  <h3 className="text-xl font-inter font-semibold text-navy mb-4">
-                    {interest.title}
-                  </h3>
-                  <p className="text-warm-gray leading-relaxed">
-                    {interest.description}
-                  </p>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Contact Section */}
-      <section id="contact" className="py-20 bg-white opacity-0 translate-y-5 transition-all duration-700">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-inter font-bold text-navy mb-6">Let's Connect</h2>
-            <p className="text-xl text-warm-gray max-w-2xl mx-auto">
-              Ready to collaborate on your next big initiative? Let's discuss how we can drive meaningful impact together.
-            </p>
-          </div>
-
-          {/* ⬇️ One column, center the item */}
-          <div className="grid grid-cols-1 gap-12 place-items-center">
-            {/* ⬇️ Constrain width + center text */}
-            <div className="w-full max-w-md text-center">
-              <div className="space-y-6">
-                {/* Email row */}
-                <div className="space-y-8">
-                  {/* Email (icon above text) */}
-                  <div className="flex flex-col items-center text-center gap-2">
-                    <div className="w-12 h-12 bg-soft-blue rounded-xl flex items-center justify-center">
-                      <Mail className="text-white w-5 h-5" />
-                    </div>
-                    <h3 className="font-inter font-semibold text-navy">Email</h3>
-                    <p className="text-warm-gray">govindaraju.venu@outlook.com</p>
-                  </div>
-
-                  {/* LinkedIn (icon above text) */}
-                  <div className="flex flex-col items-center text-center gap-2">
-                    <div className="w-12 h-12 bg-gold rounded-xl flex items-center justify-center">
-                      <Linkedin className="text-white w-5 h-5" />
-                    </div>
-                    <h3 className="font-inter font-semibold text-navy">LinkedIn</h3>
-                    <p className="text-warm-gray">
-                      <a
-                        href="https://www.linkedin.com/in/venu-siddapura-govindaraju-93b41b17b/"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="hover:underline"
-                      >
-                        linkedin.com/in/venu-siddapura-govindaraju
-                      </a>
-                    </p>
-                  </div>
-                </div>
-
-
-              </div>
-
-              {/* Center the footer note */}
-              <div className="mt-8 pt-8 border-t border-gray-200">
-                <p className="text-warm-gray text-sm leading-relaxed">
-                  <strong className="text-navy">Interested in</strong> AI Engineer, ML Engineer, and Data Engineer opportunities in applied machine learning and cloud-based AI systems.
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Footer */}
-      <footer className="bg-navy text-white py-12">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex flex-col md:flex-row justify-between items-center">
-            <div className="mb-6 md:mb-0">
-              <h3 className="text-2xl font-inter font-bold mb-2 text-center">
-                Thanks for viewing my portfolio!
-              </h3>
-              <p className="text-white/80"></p>
-            </div>
-            <div className="flex space-x-6">
-              <a
-                href="https://www.linkedin.com/in/venu-siddapura-govindaraju-93b41b17b/"
-                className="text-white/80 hover:text-gold transition-colors"
-                data-testid="link-footer-linkedin"
-              >
-                <Linkedin className="w-5 h-5" />
-              </a>
-              <a
-                href="https://github.com/svenu38"
-                className="text-white/80 hover:text-gold transition-colors"
-                data-testid="link-footer-github"
-              >
-                <Code className="w-5 h-5" />
-              </a>
-            </div>
-          </div>
-          <div className="mt-8 pt-8 border-t border-white/20 text-center text-white/60 text-sm">
-            <p>
-              &copy; 2025 All rights reserved. | Designed with passion for
-              innovation and impact.
-            </p>
-          </div>
-        </div>
-      </footer>
     </div>
-  );
+
+    {/* Contact Grid */}
+    <div className="grid md:grid-cols-2 gap-20 items-start">
+
+      {/* Left */}
+      <div className="space-y-10">
+
+        <div>
+          <h3 className="text-xl font-semibold text-slate-900 mb-2">
+            Professional Inquiries
+          </h3>
+
+          <p className="text-slate-600">
+            For collaborations, research discussions, or engineering opportunities, please reach out.
+          </p>
+        </div>
+
+        <div className="space-y-6">
+
+          <div>
+            <p className="text-sm uppercase tracking-wide text-slate-500 mb-1">
+              Email
+            </p>
+
+            <p className="text-slate-800 font-medium">
+              govindaraju.venu@outlook.com
+            </p>
+          </div>
+
+          <div>
+            <p className="text-sm uppercase tracking-wide text-slate-500 mb-1">
+              LinkedIn
+            </p>
+
+            <a
+              href="https://www.linkedin.com/in/venu-siddapura-govindaraju-93b41b17b/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-blue-600 font-medium hover:underline"
+            >
+              linkedin.com/in/venu-siddapura-govindaraju
+            </a>
+          </div>
+
+        </div>
+
+        <div className="pt-8 border-t border-slate-200">
+
+          <p className="text-slate-600">
+            Currently exploring opportunities in:
+          </p>
+
+          <ul className="mt-3 space-y-1 text-slate-700 list-disc list-inside">
+            <li>AI Engineer</li>
+            <li>Machine Learning Engineer</li>
+            <li>Data Engineer</li>
+          </ul>
+
+        </div>
+
+      </div>
+
+      {/* Right */}
+      <div className="bg-white border border-slate-200 rounded-3xl p-12 shadow-xl">
+
+        <h3 className="text-2xl font-semibold text-slate-900 mb-4">
+          Let’s Work Together
+        </h3>
+
+        <p className="text-slate-600 leading-relaxed mb-8">
+          If you’re building intelligent systems or scaling ML pipelines,
+          I’d be glad to contribute.
+        </p>
+
+        <a
+          href="mailto:govindaraju.venu@outlook.com"
+          className="inline-flex items-center justify-center px-8 py-4 bg-blue-600 text-white rounded-xl font-medium hover:bg-blue-700 transition"
+        >
+          Contact via Email
+        </a>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</motion.section>
+
+{/* Footer — Organization Style */}
+<footer className="bg-slate-900 text-white py-16">
+
+  <div className="max-w-7xl mx-auto px-6">
+
+    <div className="grid md:grid-cols-3 gap-12">
+
+      <div>
+        <h3 className="text-xl font-semibold mb-3">
+          Venu Govindaraju
+        </h3>
+
+        <p className="text-white/70 max-w-sm">
+          Applied AI Researcher and Machine Learning Engineer specializing in biometric security,
+          cloud-native ML systems, and responsible artificial intelligence.
+        </p>
+      </div>
+
+      <div>
+        <h4 className="text-sm uppercase tracking-wide text-white/60 mb-4">
+          Navigation
+        </h4>
+
+        <ul className="space-y-2 text-white/70">
+          <li><a href="#home">Home</a></li>
+          <li><a href="#experience">Experience</a></li>
+          <li><a href="#projects">Projects</a></li>
+          <li><a href="#skills">Skills</a></li>
+          <li><a href="#certifications">Certifications</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h4 className="text-sm uppercase tracking-wide text-white/60 mb-4">
+          Connect
+        </h4>
+
+        <p className="text-white/70 mb-3">
+          govindaraju.venu@outlook.com
+        </p>
+
+        <div className="flex space-x-4">
+          <Linkedin className="w-5 h-5" />
+          <Code className="w-5 h-5" />
+        </div>
+      </div>
+
+    </div>
+
+    <div className="mt-12 pt-8 border-t border-white/10 text-center text-white/50 text-sm">
+      © 2025 Venu Govindaraju. All rights reserved.
+    </div>
+
+  </div>
+
+</footer>
+
+</div>
+);
 }
