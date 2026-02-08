@@ -778,118 +778,136 @@ const prevCertSlide = () => {
 {/* Spacer */}
 <div className="h-24" aria-hidden />
 
-    {/* Hero Section */}
-    <section
-      id="home"
-      className="scroll-mt-24 md:scroll-mt-28 gradient-bg min-h-[70vh] relative overflow-hidden py-16"
-    >
-      <div className="absolute inset-0 bg-gradient-to-br from-navy/30 via-soft-blue/20 to-transparent pointer-events-none -z-10" />
+    {/* Hero — Organization Style */}
+<section
+  id="home"
+  className="relative overflow-hidden bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 py-32"
+>
+  <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,_rgba(255,255,255,0.08),transparent_60%)]" />
 
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+  <div className="relative max-w-7xl mx-auto px-6">
 
-             {/* LEFT */}
-              <div className="flex flex-col items-center gap-6">
+    <div className="grid md:grid-cols-2 gap-20 items-center">
 
-                <h1 className="text-3xl md:text-5xl lg:text-6xl font-inter font-bold text-white leading-tight text-center">
-                  Hello, I'm <span className="gradient-text">Venu</span>
-                </h1>
+      {/* LEFT — Executive Copy */}
+      <div className="space-y-8">
 
-                {/* Image + socials wrapper */}
-                <div className="flex flex-col items-center">
+        <p className="uppercase tracking-widest text-blue-400 text-sm font-semibold">
+          Applied AI • Machine Learning • Cloud Engineering
+        </p>
 
-                  {/* Profile Image */}
-                  <img
-                    src="/venu.jpg"
-                    alt="Venu Govindaraju professional headshot"
-                    className="w-64 h-64 md:w-72 md:h-72 rounded-full border-4 border-white/30 shadow-2xl object-cover"
-                  />
+        <h1 className="text-5xl lg:text-6xl font-bold text-white leading-tight">
+          Building Intelligent Systems for
+          <span className="block text-blue-400 mt-2">
+            Real-World Impact
+          </span>
+        </h1>
 
-                  {/* Social Icons */}
-                  <div className="flex gap-8 mt-6">
+        <p className="text-slate-300 text-lg leading-relaxed max-w-xl">
+          I’m <strong className="text-white">Venu Govindaraju</strong> — an Applied AI Researcher and
+          Machine Learning Engineer specializing in biometric security, deep learning systems,
+          and cloud-native ML pipelines.
+        </p>
 
-                    <a
-                      href="https://www.linkedin.com/in/venu-siddapura-govindaraju-93b41b17b/"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-white hover:text-gold transition hover:scale-110"
-                    >
-                      <Linkedin size={28} />
-                    </a>
+        <p className="text-slate-400 leading-relaxed max-w-xl">
+          Currently conducting research at the University of Naples Federico II, focusing on fingerprint
+          liveness detection, adversarial robustness, and trustworthy AI. I design production-grade
+          ML systems combining research rigor with engineering excellence.
+        </p>
 
-                    <a
-                      href="https://github.com/svenu38"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-white hover:text-gold transition hover:scale-110"
-                    >
-                      <Github size={28} />
-                    </a>
+        {/* CTA Buttons */}
+        <div className="flex flex-wrap gap-4 pt-6">
 
-                    <a
-                      href="https://x.com/venusg378"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-white hover:text-gold transition hover:scale-110"
-                    >
-                      <Twitter size={28} />
-                    </a>
+          <a
+            href="#experience"
+            className="px-8 py-4 bg-blue-600 text-white rounded-xl font-medium hover:bg-blue-700 transition"
+          >
+            View Experience
+          </a>
 
-                    <a
-                      href="https://www.instagram.com/venu_sg/"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-white hover:text-gold transition hover:scale-110"
-                    >
-                      <Instagram size={28} />
-                    </a>
-
-                  </div>
-
-                </div>
-
-              </div>
-
-
-                      {/* RIGHT */}
-            <div className="text-white/90 space-y-6 max-w-xl">
-
-              {/* Tag line */}
-              <p className="uppercase tracking-widest text-gold text-sm font-semibold">
-                AI Researcher • ML Engineer • Data Engineer
-              </p>
-
-              {/* Headline */}
-              <h2 className="text-2xl md:text-3xl font-inter font-bold leading-snug">
-                From vision to value — I build intelligent systems that scale.
-              </h2>
-
-              {/* Main paragraph */}
-              <p className="text-white/80 leading-relaxed text-base md:text-lg">
-                My work spans <span className="text-white font-medium">AI research</span>,
-                <span className="text-white font-medium"> deep learning</span>, and
-                <span className="text-white font-medium"> cloud-based data engineering</span>,
-                with over four years of experience building end-to-end machine learning pipelines.
-                I currently conduct research at the University of Naples Federico II, focusing on
-                fingerprint liveness detection, biometric deepfake defense, and adversarial robustness.
-              </p>
-
-              {/* Secondary paragraph */}
-              <p className="text-white/70 leading-relaxed text-base md:text-lg">
-                I’ve contributed to international projects including LivDet 2025 and BIOVID 2025,
-                deploying scalable AI systems on Azure using PyTorch, Docker, and CI/CD pipelines.
-                Previously, I developed LLM-based chatbot evaluation frameworks and real-time data
-                pipelines—combining responsible AI principles with production-grade engineering to
-                deliver trustworthy, real-world AI solutions.
-              </p>
-
-            </div>
-
-
+          <a
+            href="#contact"
+            className="px-8 py-4 border border-white/20 text-white rounded-xl hover:bg-white/10 transition"
+          >
+            Contact Me
+          </a>
 
         </div>
+
       </div>
-    </section>
+
+      {/* RIGHT — Professional Portrait + Signals */}
+      <div className="flex flex-col items-center">
+
+        <img
+          src="/venu.jpg"
+          alt="Venu Govindaraju"
+          className="w-80 h-80 rounded-3xl object-cover shadow-2xl border border-white/10"
+        />
+
+        {/* Trust Bar */}
+        <div className="flex gap-8 mt-10 text-slate-400">
+
+          <a
+            href="https://www.linkedin.com/in/venu-siddapura-govindaraju-93b41b17b/"
+            target="_blank"
+            className="hover:text-white transition"
+          >
+            <Linkedin size={24} />
+          </a>
+
+          <a
+            href="https://github.com/svenu38"
+            target="_blank"
+            className="hover:text-white transition"
+          >
+            <Github size={24} />
+          </a>
+
+          <a
+            href="https://x.com/venusg378"
+            target="_blank"
+            className="hover:text-white transition"
+          >
+            <Twitter size={24} />
+          </a>
+
+          <a
+            href="https://www.instagram.com/venu_sg/"
+            target="_blank"
+            className="hover:text-white transition"
+          >
+            <Instagram size={24} />
+          </a>
+
+        </div>
+
+        {/* Research Highlights */}
+        <div className="grid grid-cols-3 gap-6 mt-12 text-center">
+
+          <div>
+            <p className="text-white text-xl font-semibold">4+</p>
+            <p className="text-slate-400 text-sm">Years Experience</p>
+          </div>
+
+          <div>
+            <p className="text-white text-xl font-semibold">10+</p>
+            <p className="text-slate-400 text-sm">ML Projects</p>
+          </div>
+
+          <div>
+            <p className="text-white text-xl font-semibold">3</p>
+            <p className="text-slate-400 text-sm">Countries</p>
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+</section>
 
 
 
