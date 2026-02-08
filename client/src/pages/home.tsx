@@ -1620,6 +1620,16 @@ className="bg-gray-50 border border-slate-200 rounded-2xl p-8"
               govindaraju.venu@outlook.com
             </p>
           </div>
+          
+           <div>
+            <p className="text-sm uppercase tracking-wide text-slate-500 mb-1">
+              Phone
+            </p>
+
+            <p className="text-slate-800 font-medium">
+              +39 334 896 1888
+            </p>
+          </div>
 
           <div>
             <p className="text-sm uppercase tracking-wide text-slate-500 mb-1">
