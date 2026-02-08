@@ -891,74 +891,214 @@ const prevCertSlide = () => {
 
 
 
-    {/* Education Section — Professional SaaS Style */}
-<Section id="education">
+            {/* Education Section — Professional SaaS Style */}
+     <Section id="education">
+
+        <div className="max-w-6xl mx-auto px-6">
+
+        {/* Header */}
+        <div className="text-center mb-24">
+
+        <h2 className="text-5xl font-bold tracking-tight text-slate-900 mb-4">
+        Education
+        </h2>
+
+        <p className="text-lg text-slate-600 max-w-3xl mx-auto">
+        Advanced academic training in Artificial Intelligence and Data Science, focused on trustworthy ML systems and real-world deployment.
+        </p>
+
+        </div>
+
+        {/* Grid */}
+        <div className="grid md:grid-cols-3 gap-10">
+
+        {educationData.map((edu, i) => (
+
+        <motion.div
+        key={edu.id}
+        initial={{ opacity: 0, y: 40 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ delay: i * 0.15 }}
+        whileHover={{ scale: 1.02 }}
+        className="bg-white rounded-3xl shadow-xl border border-slate-200 overflow-hidden"
+        >
+
+        {/* Image */}
+        <div className="h-44 overflow-hidden">
+        <img
+        src={edu.image}
+        className="w-full h-full object-cover"
+        />
+        </div>
+
+        <div className="p-8">
+
+        {/* Year */}
+        <span className="inline-block mb-3 px-3 py-1 rounded-full bg-blue-50 text-blue-600 text-xs font-semibold">
+        {edu.year}
+        </span>
+
+        <h3 className="text-xl font-semibold text-slate-900 mb-1">
+        {edu.title}
+        </h3>
+
+        <p className="text-blue-600 text-sm mb-4">
+        {edu.institution}
+        </p>
+
+        <p className="text-slate-600 text-sm leading-relaxed mb-6">
+        {edu.description}
+        </p>
+
+        {/* Skills */}
+        <div className="flex flex-wrap gap-2">
+
+        {edu.tags.map((tag, idx) => (
+
+        <span
+        key={idx}
+        className="text-xs px-3 py-1 rounded-full bg-slate-100 text-slate-600"
+        >
+
+        {tag}
+
+        </span>
+
+        ))}
+
+        </div>
+
+        </div>
+
+        </motion.div>
+
+        ))}
+
+        </div>
+
+        </div>
+
+      </Section>
+
+
+      
+      {/* Experience — Engineering Career Narrative */}
+<motion.section
+  id="experience"
+  initial={{ opacity: 0 }}
+  whileInView={{ opacity: 1 }}
+  viewport={{ once: true }}
+  className="py-32 bg-gradient-to-b from-gray-50 to-white"
+>
 
 <div className="max-w-6xl mx-auto px-6">
 
-{/* Header */}
-<div className="text-center mb-24">
+{/* Experience Header */}
+<div className="text-center max-w-4xl mx-auto mb-28">
 
-<h2 className="text-5xl font-bold tracking-tight text-slate-900 mb-4">
-Education
-</h2>
+  <motion.h2
+    initial={{ opacity: 0, y: 20 }}
+    whileInView={{ opacity: 1, y: 0 }}
+    viewport={{ once: true }}
+    transition={{ duration: 0.6 }}
+    className="text-5xl font-bold tracking-tight text-slate-900 mb-6"
+  >
+    Professional Experience
+  </motion.h2>
 
-<p className="text-lg text-slate-600 max-w-3xl mx-auto">
-Advanced academic training in Artificial Intelligence and Data Science, focused on trustworthy ML systems and real-world deployment.
-</p>
+  <motion.p
+    initial={{ opacity: 0, y: 20 }}
+    whileInView={{ opacity: 1, y: 0 }}
+    viewport={{ once: true }}
+    transition={{ duration: 0.6, delay: 0.15 }}
+    className="text-lg text-slate-600 leading-relaxed"
+  >
+    Applied AI researcher and machine learning engineer with hands-on experience building biometric security systems,
+    LLM-based applications, and cloud-native data pipelines across academic and industrial environments.
+  </motion.p>
 
 </div>
 
-{/* Grid */}
-<div className="grid md:grid-cols-3 gap-10">
+{/* Career Timeline */}
+<div className="relative border-l border-slate-200 pl-12 space-y-32">
 
-{educationData.map((edu, i) => (
+{workExperienceData.map((work, i) => (
 
 <motion.div
-key={edu.id}
+key={work.id}
 initial={{ opacity: 0, y: 40 }}
 whileInView={{ opacity: 1, y: 0 }}
 viewport={{ once: true }}
-transition={{ delay: i * 0.15 }}
-whileHover={{ scale: 1.02 }}
-className="bg-white rounded-3xl shadow-xl border border-slate-200 overflow-hidden"
+transition={{ duration: 0.6, delay: i * 0.15 }}
+className="relative"
 >
 
-{/* Image */}
-<div className="h-44 overflow-hidden">
-<img
-src={edu.image}
-className="w-full h-full object-cover"
-/>
+{/* Timeline Node */}
+<div className={`absolute -left-[14px] top-6 w-7 h-7 rounded-full border-4 border-white shadow-lg ${
+work.type === "current" ? "bg-emerald-500" : "bg-slate-400"
+}`} />
+
+<div className="grid md:grid-cols-[160px_1fr] gap-14">
+
+{/* Period */}
+<div className="text-sm text-slate-500 font-medium pt-2">
+{work.period}
 </div>
 
-<div className="p-8">
+{/* Main Content */}
+<div>
 
-{/* Year */}
-<span className="inline-block mb-3 px-3 py-1 rounded-full bg-blue-50 text-blue-600 text-xs font-semibold">
-{edu.year}
-</span>
+{/* Role Header */}
+<div className="mb-6">
 
-<h3 className="text-xl font-semibold text-slate-900 mb-1">
-{edu.title}
+<h3 className="text-2xl font-semibold text-slate-900">
+{work.title}
 </h3>
 
-<p className="text-blue-600 text-sm mb-4">
-{edu.institution}
+<p className="text-blue-600 font-medium">
+{work.company}
 </p>
 
-<p className="text-slate-600 text-sm leading-relaxed mb-6">
-{edu.description}
+</div>
+
+{/* Role Description */}
+<p className="text-slate-700 leading-relaxed max-w-3xl mb-8">
+{work.description}
 </p>
 
-{/* Skills */}
+{/* Key Contributions */}
+<div className="mb-8">
+
+<h4 className="text-sm uppercase tracking-wide text-slate-500 mb-3">
+Key Contributions
+</h4>
+
+<ul className="space-y-2 text-slate-700 list-disc list-inside">
+
+<li>Designed and deployed end-to-end ML pipelines supporting real-world biometric authentication systems.</li>
+<li>Led experimentation on adversarial robustness and fingerprint liveness detection models.</li>
+<li>Built scalable cloud workflows using Azure ML, Docker, and CI/CD automation.</li>
+<li>Collaborated with cross-functional research teams and contributed to international benchmarks.</li>
+
+</ul>
+
+</div>
+
+{/* Technology Stack */}
+<div>
+
+<h4 className="text-sm uppercase tracking-wide text-slate-500 mb-3">
+Technology Stack
+</h4>
+
 <div className="flex flex-wrap gap-2">
 
-{edu.tags.map((tag, idx) => (
+{work.tags.map((tag, idx) => (
 
 <span
 key={idx}
-className="text-xs px-3 py-1 rounded-full bg-slate-100 text-slate-600"
+className="px-3 py-1 text-sm border border-slate-200 rounded-md text-slate-600 bg-slate-50"
 >
 
 {tag}
@@ -966,6 +1106,10 @@ className="text-xs px-3 py-1 rounded-full bg-slate-100 text-slate-600"
 </span>
 
 ))}
+
+</div>
+
+</div>
 
 </div>
 
@@ -979,84 +1123,7 @@ className="text-xs px-3 py-1 rounded-full bg-slate-100 text-slate-600"
 
 </div>
 
-</Section>
-
-
-      
-      {/* Work Experience Section */}
-      <section
-        id="experience"
-        className="py-20 bg-gray-50 opacity-0 translate-y-5 transition-all duration-700"
-      >
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-inter font-bold text-navy mb-6">
-              Work Experience
-            </h2>
-            <p className="text-xl text-warm-gray max-w-3xl mx-auto">
-              Professional journey from software engineering to program
-              management, driving digital transformation and business impact.
-            </p>
-          </div>
-
-          <div className="space-y-8">
-            {workExperienceData.map((work) => (
-              <Card
-                key={work.id}
-                className="card-hover bg-white rounded-2xl shadow-lg overflow-hidden border border-gray-200"
-              >
-                <div className="md:flex">
-                  <div className="md:w-1/4">
-                    <img
-                      src={work.image}
-                      alt={`${work.company} workplace or related imagery`}
-                      className="w-full h-48 md:h-full object-cover"
-                      data-testid={`img-work-${work.id}`}
-                    />
-                  </div>
-                  <div className="md:w-3/4 p-8">
-                    <div className="flex items-start justify-between mb-4">
-                      <div>
-                        <h3 className="text-2xl font-inter font-bold text-navy mb-2">
-                          {work.title}
-                        </h3>
-                        <p className="text-soft-blue font-semibold text-lg mb-1">
-                          {work.company}
-                        </p>
-                        <p className="text-warm-gray font-medium">
-                          {work.period}
-                        </p>
-                      </div>
-                      <div
-                        className={`w-3 h-3 rounded-full ${work.type === "current"
-                          ? "bg-green-500"
-                          : "bg-gray-400"
-                          }`}
-                      ></div>
-                    </div>
-
-                    <p className="text-warm-gray leading-relaxed mb-6">
-                      {work.description}
-                    </p>
-
-                    <div className="flex flex-wrap gap-2">
-                      {work.tags.map((tag, tagIndex) => (
-                        <span
-                          key={tagIndex}
-                          className="bg-soft-blue/10 text-soft-blue px-3 py-1 rounded-full text-sm skill-badge"
-                          data-testid={`tag-work-${work.id}-${tagIndex}`}
-                        >
-                          {tag}
-                        </span>
-                      ))}
-                    </div>
-                  </div>
-                </div>
-              </Card>
-            ))}
-          </div>
-        </div>
-      </section>
+</motion.section>
 
       {/* Projects Section - Carousel */}
       <section
