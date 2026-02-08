@@ -6,6 +6,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { motion } from "framer-motion";
 import {
   Form,
   FormControl,
@@ -65,6 +66,21 @@ export default function Home() {
   const [currentCertIndex, setCurrentCertIndex] = useState(0);
   const [showMoreEducation, setShowMoreEducation] = useState(false);
   const { toast } = useToast();
+
+
+    const Section = ({ children, id }: any) => (
+    <motion.section
+      id={id}
+      initial={{ opacity: 0, y: 40 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      transition={{ duration: 0.6 }}
+      className="py-20"
+    >
+      {children}
+    </motion.section>
+  );
+
 
   const form = useForm<InsertContactSubmission>({
     resolver: zodResolver(insertContactSubmissionSchema),
@@ -875,109 +891,95 @@ const prevCertSlide = () => {
 
 
 
-      {/* Education Section */}
-<section
-  id="education"
-  className="py-20 bg-white opacity-0 translate-y-5 transition-all duration-700"
+    {/* Education Section — Professional SaaS Style */}
+<Section id="education">
+
+<div className="max-w-6xl mx-auto px-6">
+
+{/* Header */}
+<div className="text-center mb-24">
+
+<h2 className="text-5xl font-bold tracking-tight text-slate-900 mb-4">
+Education
+</h2>
+
+<p className="text-lg text-slate-600 max-w-3xl mx-auto">
+Advanced academic training in Artificial Intelligence and Data Science, focused on trustworthy ML systems and real-world deployment.
+</p>
+
+</div>
+
+{/* Grid */}
+<div className="grid md:grid-cols-3 gap-10">
+
+{educationData.map((edu, i) => (
+
+<motion.div
+key={edu.id}
+initial={{ opacity: 0, y: 40 }}
+whileInView={{ opacity: 1, y: 0 }}
+viewport={{ once: true }}
+transition={{ delay: i * 0.15 }}
+whileHover={{ scale: 1.02 }}
+className="bg-white rounded-3xl shadow-xl border border-slate-200 overflow-hidden"
 >
-  <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
 
-    {/* Header */}
-    <div className="text-center mb-16">
-      <h2 className="text-4xl md:text-5xl font-inter font-bold text-navy mb-6">
-        Education
-      </h2>
+{/* Image */}
+<div className="h-44 overflow-hidden">
+<img
+src={edu.image}
+className="w-full h-full object-cover"
+/>
+</div>
 
-      <p className="text-xl text-warm-gray max-w-3xl mx-auto">
-        Academic foundation and continuous learning through degrees &
-        certifications.
-      </p>
-    </div>
+<div className="p-8">
 
-    {/* Cards */}
-    <div className="space-y-10">
+{/* Year */}
+<span className="inline-block mb-3 px-3 py-1 rounded-full bg-blue-50 text-blue-600 text-xs font-semibold">
+{edu.year}
+</span>
 
-      {educationData.map((edu) => (
+<h3 className="text-xl font-semibold text-slate-900 mb-1">
+{edu.title}
+</h3>
 
-        <Card
-          key={edu.id}
-          className="bg-white rounded-2xl shadow-lg overflow-hidden border border-gray-200"
-        >
+<p className="text-blue-600 text-sm mb-4">
+{edu.institution}
+</p>
 
-          <div className="grid grid-cols-1 md:grid-cols-[1fr_380px]">
+<p className="text-slate-600 text-sm leading-relaxed mb-6">
+{edu.description}
+</p>
 
-            {/* LEFT CONTENT */}
-            <div className="p-8">
+{/* Skills */}
+<div className="flex flex-wrap gap-2">
 
-              {/* Title + Date */}
-              <div className="flex items-start justify-between gap-4 mb-4">
+{edu.tags.map((tag, idx) => (
 
-                <div className="flex gap-4">
+<span
+key={idx}
+className="text-xs px-3 py-1 rounded-full bg-slate-100 text-slate-600"
+>
 
-                  <div className="w-12 h-12 bg-gradient-to-br from-soft-blue to-gold rounded-xl flex items-center justify-center shrink-0">
-                    <GraduationCap className="text-white w-6 h-6" />
-                  </div>
+{tag}
 
-                  <div>
-                    <h3 className="text-xl md:text-2xl font-semibold text-navy leading-snug">
-                      {edu.title}
-                    </h3>
+</span>
 
-                    <p className="text-soft-blue font-medium text-sm mt-1">
-                      {edu.institution}
-                    </p>
-                  </div>
+))}
 
-                </div>
+</div>
 
-                {/* Date */}
-                <p className="text-warm-gray text-sm font-medium whitespace-nowrap">
-                  {edu.year}
-                </p>
+</div>
 
-              </div>
+</motion.div>
 
-              {/* Description */}
-              <p className="text-warm-gray leading-relaxed mb-6 text-sm md:text-base">
-                {edu.description}
-              </p>
+))}
 
-              {/* Tags */}
-              <div className="flex flex-wrap gap-2">
-                {edu.tags.map((tag, i) => (
-                  <span
-                    key={i}
-                    className="bg-navy/10 text-navy px-3 py-1 rounded-full text-xs font-medium"
-                  >
-                    {tag}
-                  </span>
-                ))}
-              </div>
+</div>
 
-            </div>
+</div>
 
-            {/* RIGHT IMAGE — SHOW ON MOBILE TOO */}
-            <div className="block">
-
-              <img
-                src={edu.image}
-                alt={edu.institution}
-                className="w-full h-56 md:h-full object-cover"
-              />
-
-            </div>
-
-          </div>
-
-        </Card>
-
-      ))}
-
-    </div>
-
-  </div>
-</section>
-
+</Section>
 
 
       
