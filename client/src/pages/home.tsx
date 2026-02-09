@@ -1182,7 +1182,7 @@ activeSection === link.substring(1)
     <div className="text-center max-w-4xl mx-auto mb-20">
 
     <h2 className="text-5xl font-bold tracking-tight text-slate-900 mb-6">
-    Selected Projects
+    Researched Projects
     </h2>
 
     <p className="text-lg text-slate-600">
