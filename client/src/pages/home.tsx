@@ -567,6 +567,27 @@ useEffect(() => {
       ],
       impact: "Master Thesis · Physics of Data · University of Naples Federico II",
     },
+      {
+    id: 4,
+    link: "https://github.com/svenu38/AI_framework_tech",
+    title: "Hospital Admission Analytics — Patient Stay Duration Prediction",
+    company: "Healthcare Data Science · Human-Centered AI",
+    description:
+      "Developed a machine learning pipeline to analyze hospital admission data and predict patient stay duration. Conducted exploratory data analysis across demographic, clinical, and operational variables, followed by supervised modeling using Random Forest, Decision Tree, and Logistic Regression. Addressed severe class imbalance using SMOTE and performed hyperparameter tuning to improve generalization. The optimized Random Forest model achieved 62.3% accuracy, demonstrating the potential of data-driven insights to support hospital resource planning and patient care optimization.",
+    image: "/hospital-analytics.webp",
+    tags: [
+      "Healthcare Analytics",
+      "Machine Learning",
+      "Random Forest",
+      "SMOTE",
+      "Scikit-learn",
+      "Data Preprocessing",
+      "EDA",
+      "Predictive Modeling",
+      "Human-Centered AI"
+    ],
+    impact: "Random Forest Accuracy 62.3% · Resource Optimization Use Case",
+  },
 
     {
       id: 1,
