@@ -590,7 +590,7 @@ useEffect(() => {
   },
 
     {
-      id: 1,
+      id: 5,
       link: "https://drive.google.com/file/d/11GX73FO7IZpSuv9dtR-KQjJ97xPGBco0/view?usp=drive_link",
       title: "Amazon Haul - Market Research & Product Strategy",
       company: "Corporate Information Planning",
@@ -613,7 +613,7 @@ useEffect(() => {
       impact: "Canva, Figma, GenAI, Microsoft 365",
     },
     {
-      id: 2,
+      id: 6,
       link: "https://drive.google.com/drive/folders/1XV9wfXHVvWxLNkQUb--_l1I0J1uPwMhL?usp=drive_link",
       title: "AR System Implementation at Artemis Logistics",
       company: "Project Management & Implementation",
@@ -636,7 +636,7 @@ useEffect(() => {
  
 
     {
-      id: 2,
+      id: 7,
       link: "https://drive.google.com/file/d/1KY_XuLk6buagdVge8fqUnn2QW9B5bK1y/view?usp=sharing",
       title: "Medallion Theater Booking System",
       company: "Flowchart and UML Diagrams",
@@ -656,7 +656,7 @@ useEffect(() => {
       impact: "Canva, LucidChart, Visio",
     },
     {
-      id: 2,
+      id: 8,
       link: "https://drive.google.com/file/d/14Nh6I_M8tFo8As6rjV4NnPbpkvQ3UiCQ/view?usp=drive_link",
       title: "System Requirements Specification",
       company: "Project Request Proposal",
@@ -674,7 +674,7 @@ useEffect(() => {
       impact: "Atlassian Confluence, MS Word",
     },
     {
-      id: 2,
+      id: 9,
       title: "Point of Sale Migration & Optimization",
       company: "Data Management & Migration",
       description:
@@ -686,7 +686,7 @@ useEffect(() => {
     },
 
     {
-      id: 2,
+      id: 10,
       title: "Penetration Testing & Risk Management in Healthcare",
       company: "Business Information Security",
       description:
@@ -706,7 +706,7 @@ useEffect(() => {
       impact: "Kali, Metasploitable, NMAP",
     },
     {
-      id: 1,
+      id: 11,
       title: "Publication: Social Distancing and Face Mask Detection using Deep Learning Model",
       company: "https://ieeexplore.ieee.org/abstract/document/9544890",
       link: "https://d1wqtxts1xzle7.cloudfront.net/108019684/45_1570753865_28577_EMr_15Jul22_16aug21_Ff-libre.pdf?1701250233=&response-content-disposition=inline%3B+filename%3DSocial_distance_and_face_mask_detector_s.pdf&Expires=1752559866&Signature=RVSn1IcgTt~g-sgS3GopgCArqKlgCov85PYO0lFSLscOialAbXkH2elhoMZtUFTRdXdAmmkXRrJR3CbT6UP04miEJd0Eo6Hm7P~2capKdLC4pIpr-C9ouAwswsA0UxNrRG7ViWt1k~Gkc3Zj2Izk8C3MMlURV1hA7MBM-ya~toB8Y1YyobBcRYSQTwrZBja10BUzpGaHodeP-zs-wiQhd~S0DKrIEq8eRKqH8pJg8N6R3ZEesgJSjvCj2uGTiBImW4gZVl~IeSnLFjnSLjqASmt6uWoDeQd31WJ58qHMqHu~8t2WGSSoNQ9L2XIP11WaX4hYNi-gLLLyI6f1kx2yEw__&Key-Pair-Id=APKAJLOHF5GGSLRBV4ZA",
