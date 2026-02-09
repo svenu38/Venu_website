@@ -506,7 +506,7 @@ useEffect(() => {
       company: "Biometric Security Research · Adversarial & Contrastive Learning",
       description:
         "Proposed DAC-LNet, a dual-branch fingerprint presentation attack detection system for LivDet 2025, addressing cross-material variability and sensor shift in operational PAD scenarios. The architecture couples EfficientNetV2-S and ConvNeXt-Tiny via a learned scalar fusion gate, augmented with adversarial consistency (FGSM-based representation alignment) and NT-Xent contrastive loss to improve live/spoof separation. A geometry-preserving preprocessing pipeline (robust min–max normalization, pad-to-600×600, CLAHE, gray-to-RGB) ensures deployment-friendly inputs without spatial distortion. Trained on pooled LivDet 2025 data, the model achieved 92.72% accuracy, AUC 98.08%, ACE 7.29%, and EER 2.10%. Identity-disjoint per-sensor training further stabilized thresholds, yielding near-perfect AUC and sub-1% EER on most devices (e.g., Crossmatch 0.07%, Identix 0.13%, Biometrika 0.53%), with Swipe remaining the most challenging. Grad-CAM analysis highlights PAD-relevant ridge discontinuities and material cues, while fusion gate statistics demonstrate sensor-adaptive behavior.",
-      image: "https://livdet.org/wp-content/uploads/2022/01/livdet-logo.png",
+      image: "/livdet2025.png",
       tags: [
         "Fingerprint PAD",
         "LivDet 2025",
