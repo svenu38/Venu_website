@@ -474,8 +474,33 @@ useEffect(() => {
 
   // Projects data for carousel
   const projectsData = [
-    {
+
+
+       {
       id: 1,
+      link: "https://github.com/svenu38/Biovid-Challenge2025",
+      title: "BIOVID Challenge 2025 — Multimodal Biometric Authentication",
+      company: "Research Project · Open-set Audiovisual Verification",
+      description:
+        "Developed a dual-factor biometric authentication system for the BIOVID Challenge 2025 targeting open-set identity verification using synchronized audio–visual data. The system processes MP4 video inputs containing spoken passphrases and lip motion. A dual-stream deep learning architecture combines a ResNet3D-18 with Bidirectional GRU for visual feature extraction and a fine-tuned ECAPA-TDNN for robust speech embeddings. These representations are fused using a Gated Multimodal Unit (GMU) to generate a 256-dimensional joint embedding for both classification and identity matching. Trained using a composite loss (triplet loss with semi-hard negative mining + cross-entropy), the model achieved 71.36% accuracy with an EER of 28.61% under 3-fold cross-validation. A cosine similarity thresholding mechanism enables open-set decision making.",
+      image: "/biovid.png",
+      tags: [
+        "Multimodal Biometrics",
+        "Audiovisual Fusion",
+        "ResNet3D",
+        "ECAPA-TDNN",
+        "Lip Reading",
+        "Gated Multimodal Unit",
+        "Triplet Loss",
+        "Open-set Recognition",
+        "PyTorch",
+        "Cosine Similarity Matching"
+      ],
+      impact: "Accuracy 71.36% · EER 28.61% · BIOVID Challenge 2025",
+    },
+
+    {
+      id: 2,
       link: "https://github.com/svenu38/Predictive-Modelling-of-Diabetes-Risk-using-Health-Indicators/blob/main/Documents/Research_Projects/analysis_ppt.pptx",
       title: "Predictive Modeling of Diabetes Risk using Health Indicators",
       company: "Predictive Analytics for Business",
@@ -541,28 +566,7 @@ useEffect(() => {
       ],
       impact: "Figma, MS Project, Excel, LucidChart",
     },
-    {
-      id: 2,
-      link: "https://github.com/svenu38/Biovid-Challenge2025",
-      title: "BIOVID Challenge 2025 — Multimodal Biometric Authentication",
-      company: "Research Project · Open-set Audiovisual Verification",
-      description:
-        "Developed a dual-factor biometric authentication system for the BIOVID Challenge 2025 targeting open-set identity verification using synchronized audio–visual data. The system processes MP4 video inputs containing spoken passphrases and lip motion. A dual-stream deep learning architecture combines a ResNet3D-18 with Bidirectional GRU for visual feature extraction and a fine-tuned ECAPA-TDNN for robust speech embeddings. These representations are fused using a Gated Multimodal Unit (GMU) to generate a 256-dimensional joint embedding for both classification and identity matching. Trained using a composite loss (triplet loss with semi-hard negative mining + cross-entropy), the model achieved 71.36% accuracy with an EER of 28.61% under 3-fold cross-validation. A cosine similarity thresholding mechanism enables open-set decision making.",
-      image: "/biovid.png",
-      tags: [
-        "Multimodal Biometrics",
-        "Audiovisual Fusion",
-        "ResNet3D",
-        "ECAPA-TDNN",
-        "Lip Reading",
-        "Gated Multimodal Unit",
-        "Triplet Loss",
-        "Open-set Recognition",
-        "PyTorch",
-        "Cosine Similarity Matching"
-      ],
-      impact: "Accuracy 71.36% · EER 28.61% · BIOVID Challenge 2025",
-    },
+ 
 
     {
       id: 2,
