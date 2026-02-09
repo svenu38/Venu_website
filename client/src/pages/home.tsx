@@ -84,6 +84,59 @@ export default function Home() {
   );
 
 
+
+
+const [darkNav, setDarkNav] = useState(false);
+const [activeSection, setActiveSection] = useState("home");
+
+/* Switch navbar theme after Hero */
+useEffect(() => {
+  const hero = document.getElementById("home");
+
+  const handleScroll = () => {
+    if (!hero) return;
+    const heroBottom = hero.offsetHeight - 80;
+    setDarkNav(window.scrollY > heroBottom);
+  };
+
+  window.addEventListener("scroll", handleScroll);
+  handleScroll();
+
+  return () => window.removeEventListener("scroll", handleScroll);
+}, []);
+
+  useEffect(() => {
+  const sectionIds = [
+    "home",
+    "education",
+    "experience",
+    "projects",
+    "skills",
+    "certifications",
+    "contact",
+  ];
+
+  const handleScroll = () => {
+    const scrollPos = window.scrollY + 120;
+
+    for (let i = sectionIds.length - 1; i >= 0; i--) {
+      const section = document.getElementById(sectionIds[i]);
+      if (section && scrollPos >= section.offsetTop) {
+        setActiveSection(sectionIds[i]);
+        break;
+      }
+    }
+  };
+
+  window.addEventListener("scroll", handleScroll);
+  handleScroll();
+
+  return () => window.removeEventListener("scroll", handleScroll);
+}, []);
+
+
+
+
   const form = useForm<InsertContactSubmission>({
     resolver: zodResolver(insertContactSubmissionSchema),
     defaultValues: {
@@ -693,90 +746,116 @@ const prevCertSlide = () => {
   return (
     <div className="min-h-screen bg-gray-50">
       {/* Navigation — Organization Style */}
-<header className="fixed top-0 left-0 right-0 z-50 bg-white/90 backdrop-blur border-b border-slate-200">
+<header
+className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+darkNav
+? "bg-slate-900 text-white"
+: "bg-white/95 text-slate-900 border-b border-slate-200"
+}`}
+>
 
-  <div className="max-w-7xl mx-auto px-6">
+<div className="max-w-7xl mx-auto px-6">
 
-    <div className="flex items-center justify-between h-16">
+<div className="flex items-center justify-between h-16">
 
-      {/* Brand */}
-      <div className="text-lg font-semibold text-slate-900">
-        Venu Govindaraju
-      </div>
+{/* Brand */}
+<div className="text-lg font-semibold">
+Venu Govindaraju
+</div>
 
-      {/* Desktop Navigation */}
-      <nav className="hidden md:flex items-center space-x-10 text-sm font-medium text-slate-600">
+{/* Desktop Nav */}
+<nav className="hidden md:flex items-center space-x-10 text-sm font-medium">
 
-        {[
-          ["Home", "#home"],
-          ["Education", "#education"],
-          ["Experience", "#experience"],
-          ["Projects", "#projects"],
-          ["Skills", "#skills"],
-          ["Certifications", "#certifications"],
-          ["Contact", "#contact"],
-        ].map(([label, link]) => (
+{[
+["Home","#home"],
+["Education","#education"],
+["Experience","#experience"],
+["Projects","#projects"],
+["Skills","#skills"],
+["Certifications","#certifications"],
+["Contact","#contact"],
+].map(([label,link]) => (
 
-          <a
-            key={label}
-            href={link}
-            className="hover:text-slate-900 transition"
-          >
-            {label}
-          </a>
+<a
+key={label}
+href={link}
+className={`relative transition ${
+darkNav
+? "text-white/70 hover:text-white"
+: "text-slate-600 hover:text-slate-900"
+}`}
+>
 
-        ))}
+{label}
 
-      </nav>
+{/* Active underline */}
+<span
+className={`absolute -bottom-2 left-0 h-[2px] bg-current transition-all duration-300 ${
+activeSection === link.substring(1)
+? "w-full opacity-100"
+: "w-0 opacity-0"
+}`}
+/>
 
-      {/* Mobile Menu Button */}
-      <button
-        className="md:hidden text-slate-700"
-        onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-      >
-        {isMobileMenuOpen ? <X /> : <Menu />}
-      </button>
+</a>
 
-    </div>
+))}
 
-  </div>
+</nav>
 
-  {/* Mobile Navigation */}
-  {isMobileMenuOpen && (
-    <div className="md:hidden bg-white border-t border-slate-200">
+{/* Mobile Button */}
+<button
+className="md:hidden"
+onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+>
+{isMobileMenuOpen ? <X /> : <Menu />}
+</button>
 
-      <div className="px-6 py-4 space-y-4 text-sm font-medium text-slate-700">
+</div>
+</div>
 
-        {[
-          ["Home", "#home"],
-          ["Education", "#education"],
-          ["Experience", "#experience"],
-          ["Projects", "#projects"],
-          ["Skills", "#skills"],
-          ["Certifications", "#certifications"],
-          ["Contact", "#contact"],
-        ].map(([label, link]) => (
+{/* Mobile Menu */}
+{isMobileMenuOpen && (
 
-          <a
-            key={label}
-            href={link}
-            onClick={() => setIsMobileMenuOpen(false)}
-            className="block hover:text-slate-900 transition"
-          >
-            {label}
-          </a>
+<div className={`${darkNav ? "bg-slate-900 text-white" : "bg-white"} md:hidden`}>
 
-        ))}
+<div className="px-6 py-4 space-y-4 text-sm font-medium">
 
-      </div>
+{[
+["Home","#home"],
+["Education","#education"],
+["Experience","#experience"],
+["Projects","#projects"],
+["Skills","#skills"],
+["Certifications","#certifications"],
+["Contact","#contact"],
+].map(([label,link]) => (
 
-    </div>
-  )}
+<a
+key={label}
+href={link}
+onClick={() => setIsMobileMenuOpen(false)}
+className={`block transition ${
+activeSection === link.substring(1)
+? "font-semibold opacity-100"
+: "opacity-70"
+}`}
+>
+{label}
+</a>
+
+))}
+
+</div>
+</div>
+
+)}
 
 </header>
 
-{/* Spacer for fixed header */}
-<div className="h-16" aria-hidden />
+{/* Spacer */}
+<div className="h-16" />
+
 
 
     {/* Hero — Organization Style */}
@@ -1627,7 +1706,7 @@ className="bg-gray-50 border border-slate-200 rounded-2xl p-8"
             </p>
 
             <p className="text-slate-800 font-medium">
-              +39 334 896 1888
+              
             </p>
           </div>
 
