@@ -544,8 +544,31 @@ useEffect(() => {
       ],
       impact: "Master Thesis · Physics of Data · University of Naples Federico II",
     },
+
+        {
+      id: 4,
+      link: "",
+      title: "Real-World Chatbot Performance Measurement & Self-Training",
+      company: "AI Chatbot Developer · Fiven (Industry Internship)",
+      description:
+        "Industry internship focused on building and evaluating Large Language Model–based customer support chatbots. Contributed to research, development, and testing of end-to-end chatbot pipelines using Python, including prompt engineering, zero-shot learning, sentiment analysis, and conversational style adaptation. Designed quantitative NLP evaluation frameworks to measure response quality, personalization, readability, and complexity. Conducted real-user studies to validate system performance in applied settings and supported Responsible AI analysis addressing privacy, fairness, and regulatory compliance. Collaborated closely with multidisciplinary teams of AI engineers and researchers while delivering full technical documentation and final project reports.",
+      image: "/fiven.png",
+      tags: [
+        "Large Language Models",
+        "Chatbot Evaluation",
+        "Prompt Engineering",
+        "Zero-shot Learning",
+        "Sentiment Analysis",
+        "NLP Metrics",
+        "Python",
+        "Responsible AI",
+        "User Studies",
+        "Customer Support Automation"
+      ],
+      impact: "Industry Deployment · LLM Evaluation Framework · Responsible AI Integration",
+    },
       {
-    id: 4,
+    id: 5,
     link: "https://github.com/svenu38/AI_framework_tech",
     title: "Hospital Admission Analytics — Patient Stay Duration Prediction",
     company: "Healthcare Data Science · Human-Centered AI",
@@ -568,7 +591,7 @@ useEffect(() => {
 
 
     {
-      id: 5,
+      id: 6,
       link: "https://github.com/svenu38/Predictive-Modelling-of-Diabetes-Risk-using-Health-Indicators/blob/main/Documents/Research_Projects/analysis_ppt.pptx",
       title: "Predictive Modeling of Diabetes Risk using Health Indicators",
       company: "Predictive Analytics for Business",
@@ -641,6 +664,11 @@ const prevCertSlide = () => {
       title: "Database Engineer / DBA",
       issuer: "Udemy",
       pdf: "/certificates/UC-c308f498-ca45-4e04-a590-75fb518e72c7.pdf",
+    },
+    {
+      title: "ORCID Researcher Identifier",
+      issuer: "ORCID",
+      pdf: "https://orcid.org/0009-0000-7992-5708",
     },
   ];
 
