@@ -545,6 +545,29 @@ useEffect(() => {
       ],
       impact: "R, R Studio, Kaggle, Tableau",
     },
+  {
+      id: 3,
+      link: "https://github.com/svenu38/prediction_Bussines_activity",
+      title: "Predicting Business Process Activity with Deep Learning",
+      company: "Master Thesis · Università degli Studi di Napoli Federico II",
+      description:
+        "Master’s thesis project focused on predicting future activities and attributes of ongoing business process instances using deep learning. Developed an end-to-end process mining pipeline based on a simulated Purchase-to-Pay (P2P) workflow aligned with SAP table structures. The dataset incorporates realistic anomalies to emulate enterprise operational behavior. Implemented neural architectures using Keras (CNN, RNN, and LSTM) to model both temporal event sequences and static case attributes, enabling next-activity prediction and trace-level risk analysis. The work demonstrates how deep learning–driven process mining can support real-time monitoring, anomaly detection, and audit transparency in business operations.",
+      image: "/process-mining.webp",
+      tags: [
+        "Process Mining",
+        "Deep Learning",
+        "LSTM",
+        "RNN",
+        "CNN",
+        "Keras",
+        "Business Process Analytics",
+        "Time-series Modeling",
+        "Anomaly Detection",
+        "SAP P2P Simulation"
+      ],
+      impact: "Master Thesis · Physics of Data · University of Naples Federico II",
+    },
+
     {
       id: 1,
       link: "https://drive.google.com/file/d/11GX73FO7IZpSuv9dtR-KQjJ97xPGBco0/view?usp=drive_link",
