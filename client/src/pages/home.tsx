@@ -500,7 +500,7 @@ useEffect(() => {
     },
 
     {
-      id: 1,
+      id: 2,
       link: "https://github.com/svenu38/livdet2025_liveness_recognition",
       title: "LivDet 2025 — Fingerprint Presentation Attack Detection (DAC-LNet)",
       company: "Biometric Security Research · Adversarial & Contrastive Learning",
@@ -522,29 +522,6 @@ useEffect(() => {
       impact: "Accuracy 92.72% · AUC 98.08% · EER 2.10% · LivDet 2025",
     },
 
-    {
-      id: 2,
-      link: "https://github.com/svenu38/Predictive-Modelling-of-Diabetes-Risk-using-Health-Indicators/blob/main/Documents/Research_Projects/analysis_ppt.pptx",
-      title: "Predictive Modeling of Diabetes Risk using Health Indicators",
-      company: "Predictive Analytics for Business",
-      description:
-        "Utilized publicly available health data to build predictive models assessing individual risk for diabetes. This project leveraged the 2015 Behavioral Risk Factor Surveillance System (BRFSS) dataset from the CDC to explore health indicators and develop early detection tools. ",
-      image:
-        "https://cdn.analyticsvidhya.com/wp-content/uploads/2022/01/Diabetes-Prediction-Using-Machine-Learning.webp",
-      tags: [
-        "Data Preparation",
-        "Data Exploration",
-        "Model Development",
-        "Machine Learning",
-        "Feature Importance Analysis",
-        "Linear Regression",
-        "Logistic Regression",
-        "KNN",
-        "Decision Trees",
-        "SVM",
-      ],
-      impact: "R, R Studio, Kaggle, Tableau",
-    },
   {
       id: 3,
       link: "https://github.com/svenu38/prediction_Bussines_activity",
@@ -588,6 +565,31 @@ useEffect(() => {
     ],
     impact: "Random Forest Accuracy 62.3% · Resource Optimization Use Case",
   },
+
+
+    {
+      id: 5,
+      link: "https://github.com/svenu38/Predictive-Modelling-of-Diabetes-Risk-using-Health-Indicators/blob/main/Documents/Research_Projects/analysis_ppt.pptx",
+      title: "Predictive Modeling of Diabetes Risk using Health Indicators",
+      company: "Predictive Analytics for Business",
+      description:
+        "Utilized publicly available health data to build predictive models assessing individual risk for diabetes. This project leveraged the 2015 Behavioral Risk Factor Surveillance System (BRFSS) dataset from the CDC to explore health indicators and develop early detection tools. ",
+      image:
+        "https://cdn.analyticsvidhya.com/wp-content/uploads/2022/01/Diabetes-Prediction-Using-Machine-Learning.webp",
+      tags: [
+        "Data Preparation",
+        "Data Exploration",
+        "Model Development",
+        "Machine Learning",
+        "Feature Importance Analysis",
+        "Linear Regression",
+        "Logistic Regression",
+        "KNN",
+        "Decision Trees",
+        "SVM",
+      ],
+      impact: "R, R Studio, Kaggle, Tableau",
+    },
 
     {
       id: 5,
