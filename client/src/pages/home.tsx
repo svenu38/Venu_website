@@ -476,7 +476,7 @@ useEffect(() => {
   const projectsData = [
     {
       id: 1,
-      link: "https://docs.google.com/presentation/d/1A-Tu1BjCzNYnMJtxdG_280JBT6EBrDgG/edit?usp=drive_link&ouid=110348758768572062782&rtpof=true&sd=true",
+      link: "https://github.com/svenu38/Predictive-Modelling-of-Diabetes-Risk-using-Health-Indicators/blob/main/Documents/Research_Projects/analysis_ppt.pptx",
       title: "Predictive Modeling of Diabetes Risk using Health Indicators",
       company: "Predictive Analytics for Business",
       description:
