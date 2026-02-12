@@ -59,7 +59,12 @@ import {
   Twitter,
   Instagram,
   HeartPulse,
+  Cpu,
+  BarChart3,
+  Rocket,
 } from "lucide-react";
+
+
 
 
 export default function Home() {
@@ -69,6 +74,18 @@ export default function Home() {
   const [showMoreEducation, setShowMoreEducation] = useState(false);
   const [showAllProjects, setShowAllProjects] = useState(false);
   const sliderRef = useRef<HTMLDivElement | null>(null);
+  const [activeStage, setActiveStage] = useState<string | null>(null);
+  
+
+
+const stages: Record<string, string[]> = {
+  "Problem Framing": ["Stakeholder Goals","ML Objective Mapping","KPI Design"],
+  "Data Engineering": ["Azure Data Factory","Databricks","PySpark","ETL"],
+  "Model Development": ["PyTorch","CNNs","Multimodal Learning","Adversarial Training"],
+  "Validation": ["AUC","EER","Cross Validation","GradCAM"],
+  "Deployment": ["Docker","Azure ML","CI/CD","Kubernetes"],
+  "Monitoring": ["Drift Detection","Feedback Loops","Performance Metrics"],
+};
 
   const { toast } = useToast();
 
@@ -218,6 +235,23 @@ const contactMutation = useMutation({
     });
   },
 });
+
+
+
+const stageSkills:any = {
+"Problem Framing":["Stakeholder Analysis","ML Objectives","KPI Definition","Risk Mapping"],
+
+"Data Engineering":["Azure Data Factory","Databricks","PySpark","Feature Pipelines","ETL"],
+
+"Model Development":["PyTorch","CNNs","Multimodal Models","Adversarial Training","Transfer Learning"],
+
+"Validation":["Cross Validation","EER","AUC","Grad-CAM","Robustness Tests"],
+
+"Deployment":["Docker","Azure ML","GitHub Actions","CI/CD","REST APIs"],
+
+"Monitoring":["Drift Detection","Telemetry","Feedback Loops","Model Retraining"]
+};
+
 
 const onSubmit = (data: InsertContactSubmission) => {
   contactMutation.mutate(data);
@@ -1274,130 +1308,174 @@ darkNav
 </motion.section>
 
 
-      {/* Skills — Professional Competency Matrix */}
+{/* AI Architecture Pipeline */}
 <motion.section
-  id="skills"
-  initial={{ opacity: 0 }}
-  whileInView={{ opacity: 1 }}
-  viewport={{ once: true }}
-  className="py-32 bg-gray-50"
+id="roadmap"
+className="py-32 bg-gradient-to-b from-white to-gray-50"
 >
 
 <div className="max-w-7xl mx-auto px-6">
 
 {/* Header */}
-<div className="text-center max-w-4xl mx-auto mb-24">
-
-<motion.h2
-initial={{ opacity: 0, y: 20 }}
-whileInView={{ opacity: 1, y: 0 }}
-viewport={{ once: true }}
-className="text-5xl font-bold tracking-tight text-slate-900 mb-6"
->
-Core Technical Skills
-</motion.h2>
-
-<motion.p
-initial={{ opacity: 0, y: 20 }}
-whileInView={{ opacity: 1, y: 0 }}
-viewport={{ once: true }}
-transition={{ delay: 0.15 }}
-className="text-lg text-slate-600 leading-relaxed"
->
-Expertise across applied machine learning, biometric AI research, cloud-native data engineering, and responsible AI systems.
-</motion.p>
-
+<div className="text-center mb-20">
+<h2 className="text-5xl font-bold text-slate-900 mb-4">
+AI System Architecture
+</h2>
+<p className="text-slate-600">
+Research → Engineering → Production lifecycle
+</p>
 </div>
 
-{/* Skill Domains */}
-<div className="grid md:grid-cols-2 gap-12">
+{(() => {
 
-{[
+const stages = [
 {
-title: "Programming & ML Frameworks",
-skills: ["Python","SQL","R","PySpark","TensorFlow","PyTorch","Scikit-learn","NumPy","Pandas","OpenCV"]
+title:"Problem Framing",
+icon: Brain,
+skills:[
+"Stakeholder Mapping","ML Objectives","KPIs",
+"AI Ethics","Privacy & Fairness","Human-Centered AI",
+"User Studies","Experimental Design","Quantitative Evaluation"
+]
 },
-
 {
-title: "Machine Learning & Deep Learning",
-skills: ["Supervised Learning","Unsupervised Learning","CNNs","Transfer Learning","Multimodal Learning","Adversarial Training","Model Evaluation"]
+title:"Data Engineering",
+icon: Cloud,
+skills:[
+"Python","SQL","R","PySpark",
+"Azure Data Factory","Azure Synapse","Azure Databricks",
+"Apache Airflow","SSIS","Talend",
+"Data Modeling","ETL Automation",
+"PostgreSQL","MySQL","MongoDB","Cassandra","Azure SQL","Star/Snowflake Schema"
+]
 },
-
 {
-title: "NLP & Large Language Models",
-skills: ["LLMs","Prompt Engineering","Zero-shot Learning","Few-shot Learning","Sentiment Analysis","Conversational AI","Chatbot Evaluation"]
+title:"Model Development",
+icon: Cpu,
+skills:[
+"TensorFlow","PyTorch","Scikit-learn","NumPy","Pandas","OpenCV",
+"Supervised Learning","Unsupervised Learning",
+"CNNs","Transfer Learning","Multimodal Learning",
+"Adversarial Training","Model Evaluation",
+"LLMs","Prompt Engineering","Zero-shot","Few-shot",
+"Sentiment Analysis","Conversational AI","Chatbot Evaluation"
+]
 },
-
 {
-title: "Data Engineering & ETL",
-skills: ["Azure Data Factory","Azure Synapse","Azure Databricks","Apache Airflow","SSIS","Talend","Data Modeling","ETL Automation"]
+title:"Validation",
+icon: BarChart3,
+skills:[
+"AUC","EER","GradCAM","Cross Validation",
+"Model Evaluation","Responsible AI","Regulatory Compliance"
+]
 },
-
 {
-title: "Cloud & DevOps",
-skills: ["Microsoft Azure","AWS","GCP","Docker","Kubernetes","GitHub Actions","Jenkins","CI/CD Pipelines"]
+title:"Deployment",
+icon: Rocket,
+skills:[
+"Microsoft Azure","AWS","GCP",
+"Docker","Kubernetes",
+"GitHub Actions","Jenkins","CI/CD Pipelines"
+]
 },
-
 {
-title: "Visualization & Databases",
-skills: ["Power BI","Tableau","PostgreSQL","MySQL","MongoDB","Cassandra","Azure SQL","Star/Snowflake Schema"]
-},
-
-{
-title: "Responsible AI & Research",
-skills: ["AI Ethics","Privacy & Fairness","Regulatory Compliance","Human-Centered AI","User Studies","Experimental Design","Quantitative Evaluation"]
-},
-
-{
-title: "Tools & Collaboration",
-skills: ["Git","Linux","Jupyter","VS Code","Technical Documentation","Research Communication","Cross-functional Collaboration","Project Presentation"]
+title:"Monitoring",
+icon: HeartPulse,
+skills:[
+"Power BI","Tableau",
+"Drift Detection","Feedback Loops","Operational Metrics",
+"Git","Linux","Jupyter","VS Code",
+"Technical Documentation","Research Communication",
+"Cross-functional Collaboration","Project Presentation"
+]
 }
+];
 
-].map((group, idx) => (
+return (
 
-<motion.div
-key={idx}
-initial={{ opacity: 0, y: 40 }}
-whileInView={{ opacity: 1, y: 0 }}
-viewport={{ once: true }}
-transition={{ delay: idx * 0.12 }}
-whileHover={{ scale: 1.02 }}
-className="bg-white rounded-3xl border border-slate-200 shadow-xl p-10"
->
+<div>
 
-<h3 className="text-xl font-semibold text-slate-900 mb-6">
-{group.title}
-</h3>
+{/* Diagram */}
+<div className="flex flex-wrap justify-center gap-14">
 
-<div className="grid grid-cols-2 gap-y-3 gap-x-6">
-
-{group.skills.map((skill, i) => (
-
+{stages.map((stage,i)=>(
 <motion.div
 key={i}
-whileHover={{ x: 4 }}
-className="flex items-center text-slate-700 text-sm"
+onMouseEnter={()=>setActiveStage(stage.title)}
+onMouseLeave={()=>setActiveStage(null)}
+whileHover={{ scale:1.15 }}
+className="flex flex-col items-center text-center cursor-pointer group"
 >
 
-<span className="w-2 h-2 bg-blue-600 rounded-full mr-3" />
+<div className="w-20 h-20 rounded-full bg-white shadow-xl border border-slate-200 flex items-center justify-center group-hover:bg-slate-900 transition">
 
+<stage.icon className="w-10 h-10 text-slate-900 group-hover:text-white transition"/>
+
+</div>
+
+<h4 className="mt-4 font-semibold text-slate-900">
+{stage.title}
+</h4>
+
+</motion.div>
+))}
+
+</div>
+
+{/* Skills Reveal */}
+{activeStage && (
+
+<motion.div
+initial={{ opacity:0, y:20 }}
+animate={{ opacity:1, y:0 }}
+className="mt-16 text-center"
+>
+
+<h3 className="text-xl font-semibold mb-8 text-slate-900">
+{activeStage} Stack
+</h3>
+
+<div className="flex flex-wrap justify-center gap-3 max-w-5xl mx-auto">
+
+{stages
+.find(s=>s.title===activeStage)!
+.skills.map((skill,i)=>(
+
+<motion.span
+key={i}
+initial={{ scale:0 }}
+animate={{ scale:1 }}
+transition={{ delay:i*0.03 }}
+className="
+px-4 py-2 rounded-full text-xs font-medium
+bg-slate-100 text-slate-800 border border-slate-200
+hover:bg-slate-900 hover:text-white
+transition-all
+"
+>
 {skill}
-
-</motion.div>
-
-))}
-
-</div>
-
-</motion.div>
+</motion.span>
 
 ))}
 
 </div>
+
+</motion.div>
+
+)}
+
+</div>
+
+);
+
+})()}
 
 </div>
 
 </motion.section>
+
+
+
 
 {/* Certifications — Executive Credential Showcase */}
 <motion.section
@@ -1486,86 +1564,88 @@ View Certificate →
 
 </div>
 
+
+
 </motion.section>
 
 {/* Professional Focus — Icon Layout */}
 {/* Professional Focus */}
-<motion.section
-id="interests"
-initial={{ opacity: 0 }}
-whileInView={{ opacity: 1 }}
-viewport={{ once: true }}
-className="py-32 bg-white"
->
+    <motion.section
+    id="interests"
+    initial={{ opacity: 0 }}
+    whileInView={{ opacity: 1 }}
+    viewport={{ once: true }}
+    className="py-32 bg-white"
+    >
 
-<div className="max-w-7xl mx-auto px-6">
+    <div className="max-w-7xl mx-auto px-6">
 
-{/* Header */}
-<div className="text-center mb-24">
+    {/* Header */}
+    <div className="text-center mb-24">
 
-<h2 className="text-4xl md:text-5xl font-semibold text-slate-900 mb-4">
-Professional Focus
-</h2>
+    <h2 className="text-4xl md:text-5xl font-semibold text-slate-900 mb-4">
+    Professional Focus
+    </h2>
 
-<p className="text-lg text-slate-600 max-w-3xl mx-auto">
-Areas of continuous development supporting research excellence, engineering leadership, and sustainable growth.
-</p>
+    <p className="text-lg text-slate-600 max-w-3xl mx-auto">
+    Areas of continuous development supporting research excellence, engineering leadership, and sustainable growth.
+    </p>
 
-</div>
+    </div>
 
-{/* Icon Grid */}
-<div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-20 text-center">
+    {/* Icon Grid */}
+    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-20 text-center">
 
-{[
-{
-icon: Brain,
-title: "AI Research",
-desc: "Biometric security, adversarial ML, and trustworthy AI systems.",
-},
-{
-icon: Cloud,
-title: "Growth",
-desc: "Scalable ML pipelines and production MLOps workflows.",
-},
-{
-icon: HeartPulse,
-title: "Wellbeing",
-desc: "Balance, fitness, and clarity for sustainable performance.",
-},
-{
-icon: Users,
-title: "Community",
-desc: "Mentorship, collaboration, and research networks.",
-},
-].map((item, i) => (
+    {[
+    {
+    icon: Brain,
+    title: "AI Research",
+    desc: "Biometric security, adversarial ML, and trustworthy AI systems.",
+    },
+    {
+    icon: Cloud,
+    title: "Growth",
+    desc: "Scalable ML pipelines and production MLOps workflows.",
+    },
+    {
+    icon: HeartPulse,
+    title: "Wellbeing",
+    desc: "Balance, fitness, and clarity for sustainable performance.",
+    },
+    {
+    icon: Users,
+    title: "Community",
+    desc: "Mentorship, collaboration, and research networks.",
+    },
+    ].map((item, i) => (
 
-<motion.div
-key={i}
-initial={{ opacity: 0, y: 30 }}
-whileInView={{ opacity: 1, y: 0 }}
-viewport={{ once: true }}
-transition={{ delay: i * 0.1 }}
-className="flex flex-col items-center"
->
+    <motion.div
+    key={i}
+    initial={{ opacity: 0, y: 30 }}
+    whileInView={{ opacity: 1, y: 0 }}
+    viewport={{ once: true }}
+    transition={{ delay: i * 0.1 }}
+    className="flex flex-col items-center"
+    >
 
-<item.icon className="w-16 h-16 text-slate-900 mb-6 stroke-[1.5]" />
+    <item.icon className="w-16 h-16 text-slate-900 mb-6 stroke-[1.5]" />
 
-<h3 className="text-xl font-semibold text-slate-900 mb-3">
-{item.title}
-</h3>
+    <h3 className="text-xl font-semibold text-slate-900 mb-3">
+    {item.title}
+    </h3>
 
-<p className="text-slate-600 max-w-xs leading-relaxed">
-{item.desc}
-</p>
+    <p className="text-slate-600 max-w-xs leading-relaxed">
+    {item.desc}
+    </p>
 
-</motion.div>
+    </motion.div>
 
-))}
+    ))}
 
-</div>
+    </div>
 
-</div>
-</motion.section>
+    </div>
+    </motion.section>
 
 {/* Footer — Organization Style */}
 <footer className="bg-slate-900 text-white py-16">
@@ -1596,6 +1676,7 @@ className="flex flex-col items-center"
           <li><a href="#projects">Projects</a></li>
           <li><a href="#skills">Skills</a></li>
           <li><a href="#certifications">Certifications</a></li>
+          <li><a href="#interests">Professional Focus</a></li>
           <li><a href="#contact">Contact</a></li>
         </ul>
       </div>
