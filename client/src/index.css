@@ -319,3 +319,13 @@
     background-color: hsl(38 85% 60% / 0.9);
   }
 }
+
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}

@@ -7,6 +7,7 @@ import { Label } from "@/components/ui/label";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { motion } from "framer-motion";
+import { useRef } from "react";
 import {
   Form,
   FormControl,
@@ -57,6 +58,7 @@ import {
   Github,
   Twitter,
   Instagram,
+  HeartPulse,
 } from "lucide-react";
 
 
@@ -66,6 +68,7 @@ export default function Home() {
   const [currentCertIndex, setCurrentCertIndex] = useState(0);
   const [showMoreEducation, setShowMoreEducation] = useState(false);
   const [showAllProjects, setShowAllProjects] = useState(false);
+  const sliderRef = useRef<HTMLDivElement | null>(null);
 
   const { toast } = useToast();
 
@@ -89,148 +92,137 @@ export default function Home() {
 const [darkNav, setDarkNav] = useState(false);
 const [activeSection, setActiveSection] = useState("home");
 
-/* Switch navbar theme after Hero */
+/* Navbar theme based on HOME visibility */
 useEffect(() => {
-  const hero = document.getElementById("home");
+  const home = document.getElementById("home");
 
-  const handleScroll = () => {
-    if (!hero) return;
-    const heroBottom = hero.offsetHeight - 80;
-    setDarkNav(window.scrollY > heroBottom);
-  };
+  if (!home) return;
 
-  window.addEventListener("scroll", handleScroll);
-  handleScroll();
-
-  return () => window.removeEventListener("scroll", handleScroll);
-}, []);
-
-  useEffect(() => {
-  const sectionIds = [
-    "home",
-    "education",
-    "experience",
-    "projects",
-    "skills",
-    "certifications",
-    "contact",
-  ];
-
-  const handleScroll = () => {
-    const scrollPos = window.scrollY + 120;
-
-    for (let i = sectionIds.length - 1; i >= 0; i--) {
-      const section = document.getElementById(sectionIds[i]);
-      if (section && scrollPos >= section.offsetTop) {
-        setActiveSection(sectionIds[i]);
-        break;
-      }
+  const observer = new IntersectionObserver(
+    ([entry]) => {
+      // Home visible → transparent
+      // Home not visible → dark
+      setDarkNav(!entry.isIntersecting);
+    },
+    {
+      threshold: 0.8, // ensures it switches right after home
     }
-  };
+  );
 
-  window.addEventListener("scroll", handleScroll);
-  handleScroll();
+  observer.observe(home);
 
-  return () => window.removeEventListener("scroll", handleScroll);
+  return () => observer.disconnect();
+}, []);
+
+/* Active section tracking */
+
+
+useEffect(() => {
+  const sections = document.querySelectorAll("section[id]");
+
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          setActiveSection(entry.target.id);
+        }
+      });
+    },
+    {
+      rootMargin: "-100px 0px -50% 0px",
+      threshold: 0,
+    }
+  );
+
+  sections.forEach((section) => observer.observe(section));
+
+  return () => observer.disconnect();
 }, []);
 
 
+/* Smooth anchor scrolling */
+useEffect(() => {
+  const handleClick = (e: Event) => {
+    const target = e.target as HTMLAnchorElement;
 
+    if (!target.getAttribute("href")?.startsWith("#")) return;
 
-  const form = useForm<InsertContactSubmission>({
-    resolver: zodResolver(insertContactSubmissionSchema),
-    defaultValues: {
-      name: "",
-      email: "",
-      subject: "",
-      message: "",
-    },
-  });
+    e.preventDefault();
 
-  const contactMutation = useMutation({
-    mutationFn: async (data: InsertContactSubmission) => {
-      const response = await apiRequest("POST", "/api/contact", data);
-      return response.json();
-    },
-    onSuccess: (data) => {
-      toast({
-        title: "Message sent successfully!",
-        description: data.message,
-      });
-      form.reset();
-    },
-    onError: (error) => {
-      toast({
-        title: "Failed to send message",
-        description: "Please try again later.",
-        variant: "destructive",
-      });
-    },
-  });
+    const el = document.querySelector(target.getAttribute("href")!);
 
-  const onSubmit = (data: InsertContactSubmission) => {
-    contactMutation.mutate(data);
+    el?.scrollIntoView({ behavior: "smooth" });
+    setIsMobileMenuOpen(false);
   };
 
-  useEffect(() => {
-    // Smooth scrolling for navigation links
-    const handleSmoothScroll = (e: Event) => {
-      e.preventDefault();
-      const target = e.target as HTMLAnchorElement;
-      const href = target.getAttribute("href");
-      if (href?.startsWith("#")) {
-        const element = document.querySelector(href);
-        if (element) {
-          element.scrollIntoView({ behavior: "smooth" });
-          setIsMobileMenuOpen(false);
-        }
-      }
-    };
+  document.querySelectorAll('a[href^="#"]').forEach((link) => {
+    link.addEventListener("click", handleClick);
+  });
 
-    const navLinks = document.querySelectorAll('a[href^="#"]');
-    navLinks.forEach((link) => {
-      link.addEventListener("click", handleSmoothScroll);
+  return () => {
+    document.querySelectorAll('a[href^="#"]').forEach((link) => {
+      link.removeEventListener("click", handleClick);
     });
+  };
+}, []);
 
-    // Navbar background on scroll
-    const handleScroll = () => {
-      const navbar = document.querySelector("nav");
-      if (window.scrollY > 50) {
-        navbar?.classList.add("shadow-lg");
-      } else {
-        navbar?.classList.remove("shadow-lg");
-      }
-    };
-
-    window.addEventListener("scroll", handleScroll);
-
-    // Intersection Observer for fade-in animations
-    const observerOptions = {
-      threshold: 0.1,
-      rootMargin: "0px 0px -50px 0px",
-    };
-
-    const observer = new IntersectionObserver((entries) => {
+/* Section fade-in animation */
+useEffect(() => {
+  const observer = new IntersectionObserver(
+    (entries) => {
       entries.forEach((entry) => {
         if (entry.isIntersecting) {
           entry.target.classList.add("animate-fadeIn");
         }
       });
-    }, observerOptions);
+    },
+    { threshold: 0.1 }
+  );
 
-    // Observe all sections except the hero
-    document.querySelectorAll("section:not(#home)").forEach((section) => {
-      observer.observe(section);
+  document.querySelectorAll("section:not(#home)").forEach((section) => {
+    observer.observe(section);
+  });
+
+  return () => observer.disconnect();
+}, []);
+
+/* Contact form */
+
+const form = useForm<InsertContactSubmission>({
+  resolver: zodResolver(insertContactSubmissionSchema),
+  defaultValues: {
+    name: "",
+    email: "",
+    subject: "",
+    message: "",
+  },
+});
+
+const contactMutation = useMutation({
+  mutationFn: async (data: InsertContactSubmission) => {
+    const response = await apiRequest("POST", "/api/contact", data);
+    return response.json();
+  },
+  onSuccess: (data) => {
+    toast({
+      title: "Message sent successfully!",
+      description: data.message,
     });
+    form.reset();
+  },
+  onError: () => {
+    toast({
+      title: "Failed to send message",
+      description: "Please try again later.",
+      variant: "destructive",
+    });
+  },
+});
 
-    return () => {
-      navLinks.forEach((link) => {
-        link.removeEventListener("click", handleSmoothScroll);
-      });
-      window.removeEventListener("scroll", handleScroll);
-      observer.disconnect();
-    };
-  }, []);
+const onSubmit = (data: InsertContactSubmission) => {
+  contactMutation.mutate(data);
+};
+
 
   const skillCategories = [
     {
@@ -717,111 +709,107 @@ const prevCertSlide = () => {
     <div className="min-h-screen bg-gray-50">
       {/* Navigation — Organization Style */}
 <header
-className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+className={`fixed top-0 w-full z-50 transition-all duration-300 ${
 darkNav
-? "bg-slate-900 text-white"
-: "bg-white/95 text-slate-900 border-b border-slate-200"
+  ? "bg-slate-900 shadow-xl"
+  : "bg-white border-b"
 }`}
 >
+  <div className="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
 
-<div className="max-w-7xl mx-auto px-6">
+    {/* Logo */}
+    <div className={`font-semibold text-lg transition ${
+      darkNav ? "text-white" : "text-slate-900"
+    }`}>
+      Venu Govindaraju
+    </div>
 
-<div className="flex items-center justify-between h-16">
+    {/* Desktop Nav */}
+    <nav className="hidden md:flex items-center space-x-10 text-sm font-medium">
 
-{/* Brand */}
-<div className="text-lg font-semibold">
-Venu Govindaraju
-</div>
+      {[
+        ["Home","#home"],
+        ["Education","#education"],
+        ["Experience","#experience"],
+        ["Projects","#projects"],
+        ["Skills","#skills"],
+        ["Certifications","#certifications"],
+        ["Focus","#interests"],
+        ["Contact","#contact"],
+      ].map(([label, link]) => (
+        <a
+          key={label}
+          href={link}
+          className={`relative transition ${
+            darkNav
+              ? "text-white/70 hover:text-white"
+              : "text-slate-600 hover:text-slate-900"
+          }`}
+        >
 
-{/* Desktop Nav */}
-<nav className="hidden md:flex items-center space-x-10 text-sm font-medium">
+          {label}
 
-{[
-["Home","#home"],
-["Education","#education"],
-["Experience","#experience"],
-["Projects","#projects"],
-["Skills","#skills"],
-["Certifications","#certifications"],
-["Contact","#contact"],
-].map(([label,link]) => (
+          {/* Active underline */}
+          <span
+            className={`absolute -bottom-2 left-0 h-[2px] transition-all duration-300 ${
+              darkNav ? "bg-white" : "bg-slate-900"
+            } ${
+              activeSection === link.substring(1)
+                ? "w-full opacity-100"
+                : "w-0 opacity-0"
+            }`}
+          />
 
-<a
-key={label}
-href={link}
-className={`relative transition ${
-darkNav
-? "text-white/70 hover:text-white"
-: "text-slate-600 hover:text-slate-900"
-}`}
->
+        </a>
+      ))}
 
-{label}
+    </nav>
 
-{/* Active underline */}
-<span
-className={`absolute -bottom-2 left-0 h-[2px] bg-current transition-all duration-300 ${
-activeSection === link.substring(1)
-? "w-full opacity-100"
-: "w-0 opacity-0"
-}`}
-/>
+    {/* Mobile Toggle */}
+    <button
+      className={`${darkNav ? "text-white" : "text-slate-900"} md:hidden`}
+      onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+    >
+      {isMobileMenuOpen ? <X /> : <Menu />}
+    </button>
 
-</a>
+  </div>
 
-))}
+  {/* Mobile Menu */}
+  {isMobileMenuOpen && (
+    <div className={`${darkNav ? "bg-slate-900 text-white" : "bg-white"} md:hidden`}>
+      <div className="px-6 py-4 space-y-4 text-sm font-medium">
 
-</nav>
+        {[
+          ["Home","#home"],
+          ["Education","#education"],
+          ["Experience","#experience"],
+          ["Projects","#projects"],
+          ["Skills","#skills"],
+          ["Certifications","#certifications"],
+          ["Focus","#interests"],
+          ["Contact","#contact"],
+        ].map(([label, link]) => (
+          <a
+            key={label}
+            href={link}
+            onClick={() => setIsMobileMenuOpen(false)}
+            className={`block transition ${
+              activeSection === link.substring(1)
+                ? "font-semibold opacity-100"
+                : "opacity-70"
+            }`}
+          >
+            {label}
+          </a>
+        ))}
 
-{/* Mobile Button */}
-<button
-className="md:hidden"
-onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
->
-{isMobileMenuOpen ? <X /> : <Menu />}
-</button>
-
-</div>
-</div>
-
-{/* Mobile Menu */}
-{isMobileMenuOpen && (
-
-<div className={`${darkNav ? "bg-slate-900 text-white" : "bg-white"} md:hidden`}>
-
-<div className="px-6 py-4 space-y-4 text-sm font-medium">
-
-{[
-["Home","#home"],
-["Education","#education"],
-["Experience","#experience"],
-["Projects","#projects"],
-["Skills","#skills"],
-["Certifications","#certifications"],
-["Contact","#contact"],
-].map(([label,link]) => (
-
-<a
-key={label}
-href={link}
-onClick={() => setIsMobileMenuOpen(false)}
-className={`block transition ${
-activeSection === link.substring(1)
-? "font-semibold opacity-100"
-: "opacity-70"
-}`}
->
-{label}
-</a>
-
-))}
-
-</div>
-</div>
-
-)}
+      </div>
+    </div>
+  )}
 
 </header>
+
 
 {/* Spacer */}
 <div className="h-16" />
@@ -960,96 +948,99 @@ activeSection === link.substring(1)
 </section>
 
 
-
-            {/* Education Section — Professional SaaS Style */}
-     <Section id="education">
-
-        <div className="max-w-6xl mx-auto px-6">
-
-        {/* Header */}
-        <div className="text-center mb-24">
-
-        <h2 className="text-5xl font-bold tracking-tight text-slate-900 mb-4">
-        Education
-        </h2>
-
-        <p className="text-lg text-slate-600 max-w-3xl mx-auto">
-        Advanced academic training in Artificial Intelligence and Data Science, focused on trustworthy ML systems and real-world deployment.
-        </p>
-
-        </div>
-
-        {/* Grid */}
-        <div className="grid md:grid-cols-3 gap-10">
-
-        {educationData.map((edu, i) => (
-
-        <motion.div
-        key={edu.id}
-        initial={{ opacity: 0, y: 40 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-        transition={{ delay: i * 0.15 }}
-        whileHover={{ scale: 1.02 }}
-        className="bg-white rounded-3xl shadow-xl border border-slate-200 overflow-hidden"
+        {/* Education Section — Professional SaaS Style */}
+        <motion.section
+          id="education"
+          className="scroll-mt-24 py-32 bg-white"
+          initial={{ opacity: 0, y: 40 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
         >
+          <div className="max-w-6xl mx-auto px-6">
 
-        {/* Image */}
-        <div className="h-44 overflow-hidden">
-        <img
-        src={edu.image}
-        className="w-full h-full object-cover"
-        />
-        </div>
+            {/* Header */}
+            <div className="text-center mb-24">
 
-        <div className="p-8">
+              <h2 className="text-5xl font-bold tracking-tight text-slate-900 mb-4">
+                Education
+              </h2>
 
-        {/* Year */}
-        <span className="inline-block mb-3 px-3 py-1 rounded-full bg-blue-50 text-blue-600 text-xs font-semibold">
-        {edu.year}
-        </span>
+              <p className="text-lg text-slate-600 max-w-3xl mx-auto">
+                Advanced academic training in Artificial Intelligence and Data Science, focused on trustworthy ML systems and real-world deployment.
+              </p>
 
-        <h3 className="text-xl font-semibold text-slate-900 mb-1">
-        {edu.title}
-        </h3>
+            </div>
 
-        <p className="text-blue-600 text-sm mb-4">
-        {edu.institution}
-        </p>
+            {/* Grid */}
+            <div className="grid md:grid-cols-3 gap-10">
 
-        <p className="text-slate-600 text-sm leading-relaxed mb-6">
-        {edu.description}
-        </p>
+              {educationData.map((edu, i) => (
 
-        {/* Skills */}
-        <div className="flex flex-wrap gap-2">
+                <motion.div
+                  key={edu.id}
+                  initial={{ opacity: 0, y: 40 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: i * 0.15 }}
+                  whileHover={{ scale: 1.02 }}
+                  className="bg-white rounded-3xl shadow-xl border border-slate-200 overflow-hidden"
+                >
 
-        {edu.tags.map((tag, idx) => (
+                  {/* Image */}
+                  <div className="h-44 overflow-hidden">
+                    <img
+                      src={edu.image}
+                      className="w-full h-full object-cover"
+                    />
+                  </div>
 
-        <span
-        key={idx}
-        className="text-xs px-3 py-1 rounded-full bg-slate-100 text-slate-600"
-        >
+                  <div className="p-8">
 
-        {tag}
+                    {/* Year */}
+                    <span className="inline-block mb-3 px-3 py-1 rounded-full bg-blue-50 text-blue-600 text-xs font-semibold">
+                      {edu.year}
+                    </span>
 
-        </span>
+                    <h3 className="text-xl font-semibold text-slate-900 mb-1">
+                      {edu.title}
+                    </h3>
 
-        ))}
+                    <p className="text-blue-600 text-sm mb-4">
+                      {edu.institution}
+                    </p>
 
-        </div>
+                    <p className="text-slate-600 text-sm leading-relaxed mb-6">
+                      {edu.description}
+                    </p>
 
-        </div>
+                    {/* Skills */}
+                    <div className="flex flex-wrap gap-2">
 
-        </motion.div>
+                      {edu.tags.map((tag, idx) => (
 
-        ))}
+                        <span
+                          key={idx}
+                          className="text-xs px-3 py-1 rounded-full bg-slate-100 text-slate-600"
+                        >
+                          {tag}
+                        </span>
 
-        </div>
+                      ))}
 
-        </div>
+                    </div>
 
-      </Section>
+                  </div>
+
+                </motion.div>
+
+              ))}
+
+            </div>
+
+          </div>
+        </motion.section>
+
 
 
       
@@ -1195,118 +1186,93 @@ activeSection === link.substring(1)
 
           </motion.section>
 
-    {/* Projects — Scalable Professional Layout */}
-    <motion.section
-      id="projects"
-      initial={{ opacity: 0 }}
-      whileInView={{ opacity: 1 }}
-      viewport={{ once: true }}
-      className="py-32 bg-white"
-    >
-
-    <div className="max-w-7xl mx-auto px-6">
+{/* Featured Projects */}
+<motion.section
+  id="projects"
+  initial={{ opacity: 0 }}
+  whileInView={{ opacity: 1 }}
+  viewport={{ once: true }}
+  className="scroll-mt-24 py-20 bg-white"
+>
+  <div className="max-w-7xl mx-auto px-6 relative overflow-hidden">
 
     {/* Header */}
-    <div className="text-center max-w-4xl mx-auto mb-20">
+    <div className="text-center max-w-4xl mx-auto mb-6">
 
-    <h2 className="text-5xl font-bold tracking-tight text-slate-900 mb-6">
-    Researched Projects
-    </h2>
+      <h2 className="text-5xl font-bold tracking-tight text-slate-900 mb-6">
+        Featured Projects
+      </h2>
 
-    <p className="text-lg text-slate-600">
-    A curated selection of applied AI, biometric security, and data engineering projects.
-    </p>
+      <p className="text-lg text-slate-600 leading-relaxed">
+        Selected applied AI, biometric security, and machine learning projects
+        demonstrating research depth and production-level engineering.
+      </p>
 
     </div>
 
-    {/* Grid */}
-    <div className="grid md:grid-cols-2 gap-10">
+    {/* Navigation Buttons */}
+    <div className="flex justify-end gap-3 mb-10">
+      <button
+        onClick={() =>
+          sliderRef.current?.scrollBy({ left: -350, behavior: "smooth" })
+        }
+        className="w-10 h-10 border border-slate-300 rounded-full flex items-center justify-center hover:bg-slate-100 transition"
+      >
+        <ChevronLeft />
+      </button>
 
-    {projectsData
-    .slice(0, showAllProjects ? projectsData.length : 4)
-    .map((project, index) => (
+      <button
+        onClick={() =>
+          sliderRef.current?.scrollBy({ left: 350, behavior: "smooth" })
+        }
+        className="w-10 h-10 border border-slate-300 rounded-full flex items-center justify-center hover:bg-slate-100 transition"
+      >
+        <ChevronRight />
+      </button>
+    </div>
 
-    <motion.div
-    key={project.id}
-    initial={{ opacity: 0, y: 30 }}
-    whileInView={{ opacity: 1, y: 0 }}
-    viewport={{ once: true }}
-    transition={{ delay: index * 0.08 }}
-    whileHover={{ scale: 1.02 }}
-    className="bg-white rounded-2xl border border-slate-200 shadow-lg overflow-hidden"
+    {/* Slider */}
+    <div
+      ref={sliderRef}
+      className="flex gap-6 overflow-x-auto scrollbar-hide scroll-smooth snap-x snap-mandatory"
     >
+      {projectsData.map((project, i) => (
+        <motion.div
+          key={i}
+          whileHover={{ scale: 1.03 }}
+          className="min-w-[320px] max-w-[320px] snap-start bg-white border rounded-xl overflow-hidden shadow-sm hover:shadow-lg transition"
+        >
+          <img
+            src={project.image}
+            className="h-44 w-full object-cover"
+          />
 
-    <div className="h-48 overflow-hidden">
-    <img
-    src={project.image}
-    className="w-full h-full object-cover"
-    />
+          <div className="p-5">
+            <h3 className="font-semibold text-slate-900 leading-snug mb-2">
+              {project.title}
+            </h3>
+
+            <p className="text-sm text-slate-600 line-clamp-3 mb-3">
+              {project.description}
+            </p>
+
+            {project.link && (
+              <a
+                href={project.link}
+                target="_blank"
+                className="text-blue-600 text-sm font-medium hover:underline"
+              >
+                Learn more →
+              </a>
+            )}
+          </div>
+        </motion.div>
+      ))}
     </div>
 
-    <div className="p-8">
+  </div>
+</motion.section>
 
-    <h3 className="text-xl font-semibold text-slate-900 mb-1">
-    {project.title}
-    </h3>
-
-    <p className="text-blue-600 font-medium mb-3">
-    {project.company}
-    </p>
-
-    <p className="text-slate-600 mb-4">
-    {project.description}
-    </p>
-
-    <div className="flex flex-wrap gap-2 mb-4">
-
-    {project.tags.slice(0,4).map((tag, idx) => (
-
-    <span
-    key={idx}
-    className="px-3 py-1 text-xs border border-slate-200 rounded-md text-slate-600"
-    >
-    {tag}
-    </span>
-
-    ))}
-
-    </div>
-
-    {project.link && (
-    <a
-    href={project.link}
-    target="_blank"
-    className="text-blue-600 font-medium hover:underline"
-    >
-    View Project →
-    </a>
-    )}
-
-    </div>
-
-    </motion.div>
-
-    ))}
-
-    </div>
-
-    {/* Load More */}
-    <div className="text-center mt-12">
-
-    <button
-    onClick={() => setShowAllProjects(!showAllProjects)}
-    className="px-8 py-3 border border-slate-300 rounded-full text-slate-700 hover:bg-slate-50 transition"
-    >
-
-    {showAllProjects ? "Show Less" : "View All Projects"}
-
-    </button>
-
-    </div>
-
-    </div>
-
-    </motion.section>
 
       {/* Skills — Professional Competency Matrix */}
 <motion.section
@@ -1522,82 +1488,74 @@ View Certificate →
 
 </motion.section>
 
-
+{/* Professional Focus — Icon Layout */}
 {/* Professional Focus */}
 <motion.section
-  id="interests"
-  initial={{ opacity: 0 }}
-  whileInView={{ opacity: 1 }}
-  viewport={{ once: true }}
-  className="py-32 bg-white"
+id="interests"
+initial={{ opacity: 0 }}
+whileInView={{ opacity: 1 }}
+viewport={{ once: true }}
+className="py-32 bg-white"
 >
 
-<div className="max-w-6xl mx-auto px-6">
+<div className="max-w-7xl mx-auto px-6">
 
 {/* Header */}
-<div className="text-center max-w-4xl mx-auto mb-24">
+<div className="text-center mb-24">
 
-<motion.h2
-initial={{ opacity: 0, y: 20 }}
-whileInView={{ opacity: 1, y: 0 }}
-viewport={{ once: true }}
-className="text-5xl font-bold tracking-tight text-slate-900 mb-6"
->
+<h2 className="text-4xl md:text-5xl font-semibold text-slate-900 mb-4">
 Professional Focus
-</motion.h2>
+</h2>
 
-<p className="text-lg text-slate-600 leading-relaxed">
-Areas of continuous development aligned with research excellence and engineering leadership.
+<p className="text-lg text-slate-600 max-w-3xl mx-auto">
+Areas of continuous development supporting research excellence, engineering leadership, and sustainable growth.
 </p>
 
 </div>
 
-{/* Focus Grid */}
-<div className="grid md:grid-cols-3 gap-12">
+{/* Icon Grid */}
+<div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-20 text-center">
 
 {[
 {
+icon: Brain,
 title: "AI Research",
-description: "Biometric security, adversarial machine learning, and trustworthy AI systems."
+desc: "Biometric security, adversarial ML, and trustworthy AI systems.",
 },
 {
-title: "Cloud Engineering",
-description: "Designing scalable ML pipelines and MLOps workflows for production environments."
+icon: Cloud,
+title: "Growth",
+desc: "Scalable ML pipelines and production MLOps workflows.",
 },
 {
-title: "Scientific Learning",
-description: "Keeping pace with current research in computer vision and deep learning."
+icon: HeartPulse,
+title: "Wellbeing",
+desc: "Balance, fitness, and clarity for sustainable performance.",
 },
 {
-title: "Technical Mentorship",
-description: "Supporting junior engineers and students entering applied AI."
+icon: Users,
+title: "Community",
+desc: "Mentorship, collaboration, and research networks.",
 },
-{
-title: "Systems Thinking",
-description: "Bridging research with production-grade engineering practices."
-},
-{
-title: "Wellbeing & Balance",
-description: "Maintaining performance through fitness, travel, and continuous self-improvement."
-}
-
-].map((item, idx) => (
+].map((item, i) => (
 
 <motion.div
-key={idx}
+key={i}
 initial={{ opacity: 0, y: 30 }}
 whileInView={{ opacity: 1, y: 0 }}
 viewport={{ once: true }}
-transition={{ delay: idx * 0.1 }}
-className="bg-gray-50 border border-slate-200 rounded-2xl p-8"
+transition={{ delay: i * 0.1 }}
+className="flex flex-col items-center"
 >
+
+<item.icon className="w-16 h-16 text-slate-900 mb-6 stroke-[1.5]" />
 
 <h3 className="text-xl font-semibold text-slate-900 mb-3">
 {item.title}
 </h3>
 
-<p className="text-slate-600 leading-relaxed">
-{item.description}
+<p className="text-slate-600 max-w-xs leading-relaxed">
+{item.desc}
 </p>
 
 </motion.div>
@@ -1607,137 +1565,6 @@ className="bg-gray-50 border border-slate-200 rounded-2xl p-8"
 </div>
 
 </div>
-
-</motion.section>
-
-
-
-{/* Contact — Organizational Layout */}
-<motion.section
-  id="contact"
-  initial={{ opacity: 0 }}
-  whileInView={{ opacity: 1 }}
-  viewport={{ once: true }}
-  className="py-32 bg-gray-50"
->
-
-  <div className="max-w-6xl mx-auto px-6">
-
-    {/* Header */}
-    <div className="text-center max-w-4xl mx-auto mb-24">
-
-      <motion.h2
-        initial={{ opacity: 0, y: 20 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-        className="text-5xl font-bold tracking-tight text-slate-900 mb-6"
-      >
-        Get in Touch
-      </motion.h2>
-
-      <p className="text-lg text-slate-600 leading-relaxed">
-        Open to collaboration, research partnerships, and professional opportunities in applied AI,
-        machine learning, and cloud-native engineering.
-      </p>
-
-    </div>
-
-    {/* Contact Grid */}
-    <div className="grid md:grid-cols-2 gap-20 items-start">
-
-      {/* Left */}
-      <div className="space-y-10">
-
-        <div>
-          <h3 className="text-xl font-semibold text-slate-900 mb-2">
-            Professional Inquiries
-          </h3>
-
-          <p className="text-slate-600">
-            For collaborations, research discussions, or engineering opportunities, please reach out.
-          </p>
-        </div>
-
-        <div className="space-y-6">
-
-          <div>
-            <p className="text-sm uppercase tracking-wide text-slate-500 mb-1">
-              Email
-            </p>
-
-            <p className="text-slate-800 font-medium">
-              govindaraju.venu@outlook.com
-            </p>
-          </div>
-          
-           <div>
-            <p className="text-sm uppercase tracking-wide text-slate-500 mb-1">
-              Phone
-            </p>
-
-            <p className="text-slate-800 font-medium">
-              
-            </p>
-          </div>
-
-          <div>
-            <p className="text-sm uppercase tracking-wide text-slate-500 mb-1">
-              LinkedIn
-            </p>
-
-            <a
-              href="https://www.linkedin.com/in/venu-siddapura-govindaraju-93b41b17b/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-blue-600 font-medium hover:underline"
-            >
-              linkedin.com/in/venu-siddapura-govindaraju
-            </a>
-          </div>
-
-        </div>
-
-        <div className="pt-8 border-t border-slate-200">
-
-          <p className="text-slate-600">
-            Currently exploring opportunities in:
-          </p>
-
-          <ul className="mt-3 space-y-1 text-slate-700 list-disc list-inside">
-            <li>AI Engineer</li>
-            <li>Machine Learning Engineer</li>
-            <li>Data Engineer</li>
-          </ul>
-
-        </div>
-
-      </div>
-
-      {/* Right */}
-      <div className="bg-white border border-slate-200 rounded-3xl p-12 shadow-xl">
-
-        <h3 className="text-2xl font-semibold text-slate-900 mb-4">
-          Let’s Work Together
-        </h3>
-
-        <p className="text-slate-600 leading-relaxed mb-8">
-          If you’re building intelligent systems or scaling ML pipelines,
-          I’d be glad to contribute.
-        </p>
-
-        <a
-          href="mailto:govindaraju.venu@outlook.com"
-          className="inline-flex items-center justify-center px-8 py-4 bg-blue-600 text-white rounded-xl font-medium hover:bg-blue-700 transition"
-        >
-          Contact via Email
-        </a>
-
-      </div>
-
-    </div>
-
-  </div>
-
 </motion.section>
 
 {/* Footer — Organization Style */}
