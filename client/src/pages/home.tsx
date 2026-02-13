@@ -657,34 +657,33 @@ const prevCertSlide = () => {
 };
 
 
-    const certifications = [
-    {
-      title: "Create Machine Learning Models in Microsoft Azure",
-      issuer: "Coursera · Mar 2025",
-      pdf: "/certificates/Coursera 3L7KYYIVJKY2-2.pdf",
-    },
-    {
-      title: "Microsoft Azure Data Fundamentals (DP-900)",
-      issuer: "Microsoft / Coursera · Feb 2025",
-      pdf: "/certificates/Coursera RFU26J0BTZV1-3.pdf",
-    },
-    {
-      title: "Machine Learning in Production",
-      issuer: "DeepLearning.AI · Aug 2024",
-      pdf: "/certificates/Coursera JW0H7X2IAL6F.pdf",
-    },
-    {
-      title: "Database Engineer / DBA",
-      issuer: "Udemy",
-      pdf: "/certificates/UC-c308f498-ca45-4e04-a590-75fb518e72c7.pdf",
-    },
-    {
-      title: "ORCID Researcher Identifier",
-      issuer: "ORCID",
-      pdf: "https://orcid.org/0009-0000-7992-5708",
-    },
-  ];
-
+        const certifications = [
+        {
+        title: "Microsoft Azure Data Fundamentals (DP-900)",
+        issuer: "Microsoft",
+        pdf: "/certificates/Coursera_RF...pdf",
+        logo: "/logos/microsoft_logo.jpg",
+        },
+        {
+        title: "Machine Learning in Production",
+        issuer: "DeepLearning.AI",
+        pdf: "/certificates/Coursera_JW...pdf",
+        logo: "/logos/Deeplearning.png",
+        },
+        {
+        title: "Create ML Models in Azure",
+        issuer: "Coursera",
+        pdf: "/certificates/Coursera_3L7...pdf",
+        logo: "/logos/coursera.png",
+        },
+        {
+        title: "Database Engineer / DBA",
+        issuer: "Udemy",
+        pdf: "/certificates/UC-c308f....pdf",
+        logo: "/logos/udemy.webp",
+        },
+        
+        ];
   const interests = [
   {
     icon: Brain,
@@ -1477,87 +1476,66 @@ darkNav
   </div>
 </motion.section>
 
-
-
-
-{/* Certifications — Executive Credential Showcase */}
+{/* Certifications — Enterprise Logo Showcase */}
 <motion.section
-  id="certifications"
-  initial={{ opacity: 0 }}
-  whileInView={{ opacity: 1 }}
-  viewport={{ once: true }}
-  className="py-32 bg-gradient-to-b from-gray-50 to-white"
->
-
-<div className="max-w-7xl mx-auto px-6">
-
-{/* Header */}
-<div className="text-center max-w-4xl mx-auto mb-24">
-
-<motion.h2
-initial={{ opacity: 0, y: 20 }}
-whileInView={{ opacity: 1, y: 0 }}
+id="certifications"
+initial={{ opacity: 0 }}
+whileInView={{ opacity: 1 }}
 viewport={{ once: true }}
-className="text-5xl font-bold tracking-tight text-slate-900 mb-6"
+className="py-32 bg-white"
 >
+
+<div className="max-w-7xl mx-auto px-6 text-center">
+
+<h2 className="text-5xl font-bold text-slate-900 mb-6">
 Professional Certifications
-</motion.h2>
+</h2>
 
-<motion.p
-initial={{ opacity: 0, y: 20 }}
-whileInView={{ opacity: 1, y: 0 }}
-viewport={{ once: true }}
-transition={{ delay: 0.15 }}
-className="text-lg text-slate-600 leading-relaxed"
->
+<p className="text-slate-600 max-w-3xl mx-auto mb-20">
 Validated expertise across cloud platforms, machine learning pipelines, and production-grade AI systems.
-</motion.p>
+</p>
 
-</div>
-
-{/* Credentials */}
-<div className="grid md:grid-cols-2 gap-12">
+<div className="grid md:grid-cols-4 gap-16">
 
 {certifications.map((cert, idx) => (
 
 <motion.div
 key={idx}
-initial={{ opacity: 0, y: 40 }}
-whileInView={{ opacity: 1, y: 0 }}
-viewport={{ once: true }}
-transition={{ delay: idx * 0.12 }}
-whileHover={{ scale: 1.03 }}
-className="group bg-white rounded-3xl border border-slate-200 shadow-xl p-10 relative overflow-hidden"
+whileHover={{ y: -12 }}
+transition={{ type: "spring", stiffness: 200 }}
+className="group flex flex-col items-center"
 >
 
-{/* Accent Bar */}
-<div className="absolute left-0 top-0 h-full w-1 bg-blue-600 opacity-0 group-hover:opacity-100 transition" />
+{/* Logo Circle */}
+<div className="
+w-36 h-36 rounded-full bg-white shadow-xl border border-slate-200
+flex items-center justify-center mb-6
+group-hover:shadow-2xl group-hover:scale-110 transition
+">
 
-{/* Content */}
-<h3 className="text-xl font-semibold text-slate-900 mb-2">
+<img
+src={cert.logo}
+alt={cert.issuer}
+className="max-w-[70%] max-h-[70%] object-contain"
+/>
+
+</div>
+
+<h4 className="text-sm font-semibold text-slate-900 mb-2 text-center">
 {cert.title}
-</h3>
+</h4>
 
-<p className="text-blue-600 font-medium mb-6">
+<p className="text-xs text-slate-500 mb-4">
 {cert.issuer}
 </p>
-
-<div className="flex items-center justify-between">
-
-<span className="text-sm text-slate-500">
-Credential Verified
-</span>
 
 <a
 href={cert.pdf}
 target="_blank"
-rel="noopener noreferrer"
-className="inline-flex items-center text-blue-600 font-medium hover:underline"
+className="text-xs font-medium text-slate-900 underline underline-offset-4 hover:text-slate-700 transition"
 >
-View Certificate →
+View Credential →
 </a>
-
-</div>
 
 </motion.div>
 
@@ -1567,9 +1545,8 @@ View Certificate →
 
 </div>
 
-
-
 </motion.section>
+
 
 {/* Professional Focus — Icon Layout */}
 {/* Professional Focus */}
@@ -1649,6 +1626,7 @@ View Certificate →
 
     </div>
     </motion.section>
+
 
 {/* Footer — Organization Style */}
 <footer className="bg-slate-900 text-white py-16">
