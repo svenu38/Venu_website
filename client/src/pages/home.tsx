@@ -74,7 +74,7 @@ export default function Home() {
   const [showMoreEducation, setShowMoreEducation] = useState(false);
   const [showAllProjects, setShowAllProjects] = useState(false);
   const sliderRef = useRef<HTMLDivElement | null>(null);
-  const [activeStage, setActiveStage] = useState<string | null>(null);
+  const [activeStage, setActiveStage] = useState<string>("Problem Framing");
   
 
 
@@ -371,12 +371,7 @@ const onSubmit = (data: InsertContactSubmission) => {
           "Specialized in trustworthy AI, deep learning, and LLM evaluation. Thesis focused on real-world chatbot performance measurement using FACQ metrics, including user studies and ethical AI analysis.",
         image: "/unina.jpg",
         tags: [
-          "Machine Learning",
-          "Responsible AI",
-          "LLMs",
-          "Chatbot Evaluation",
-          "FACQ Metrics",
-          "Ethics & Privacy",
+         
         ],
         type: "degree",
       },
@@ -390,11 +385,7 @@ const onSubmit = (data: InsertContactSubmission) => {
           "Focused on data engineering, predictive modeling, and scalable analytics pipelines using Azure Databricks, Synapse Analytics, and PySpark.",
         image: "/unina.jpg",
         tags: [
-          "Data Engineering",
-          "PySpark",
-          "Azure Databricks",
-          "ETL Pipelines",
-          "Predictive Modeling",
+         
         ],
         type: "degree",
       },
@@ -408,11 +399,7 @@ const onSubmit = (data: InsertContactSubmission) => {
           "Strong foundation in software engineering, algorithms, and machine learning. Final-year project on deep learning–based face mask and social distancing detection.",
         image: "/nitte.jpg",
         tags: [
-          "Software Engineering",
-          "Deep Learning",
-          "CNNs",
-          "Computer Vision",
-          "Final Year Project",
+          
         ],
         type: "degree",
       },
@@ -764,9 +751,9 @@ darkNav
       {[
         ["Home","#home"],
         ["Education","#education"],
-        ["Experience","#experience"],
-        ["Projects","#projects"],
         ["Skills","#skills"],
+        ["Experience","#experience"],
+        ["Projects","#projects"], 
         ["Certifications","#certifications"],
         ["Focus","#interests"],
         ["Contact","#contact"],
@@ -817,9 +804,9 @@ darkNav
         {[
           ["Home","#home"],
           ["Education","#education"],
+          ["Skills","#skills"],
           ["Experience","#experience"],
           ["Projects","#projects"],
-          ["Skills","#skills"],
           ["Certifications","#certifications"],
           ["Focus","#interests"],
           ["Contact","#contact"],
@@ -1075,9 +1062,192 @@ darkNav
           </div>
         </motion.section>
 
+                              
+          {/* AI Architecture Pipeline */}
+          <motion.section
+          id="skills"
+          className="py-32 bg-gradient-to-b from-white to-gray-50"
+          >
 
+          <div className="max-w-7xl mx-auto px-6">
 
-      
+          {/* Header */}
+          <div className="text-center mb-20">
+          <h2 className="text-5xl font-bold text-slate-900 mb-4">
+          AI System Architecture
+          </h2>
+          <p className="text-slate-600">
+          Research → Engineering → Production lifecycle
+          </p>
+          </div>
+
+          {(() => {
+
+          const stages = [
+          {
+          title:"Problem Framing",
+          icon: Brain,
+          skills:[
+          "Stakeholder Mapping","ML Objectives","KPIs",
+          "AI Ethics","Privacy & Fairness","Human-Centered AI",
+          "User Studies","Experimental Design","Quantitative Evaluation"
+          ]
+          },
+          {
+          title:"Data Engineering",
+          icon: Cloud,
+          skills:[
+          "Python","SQL","R","PySpark",
+          "Azure Data Factory","Azure Synapse","Azure Databricks",
+          "Apache Airflow","SSIS","Talend",
+          "Data Modeling","ETL Automation",
+          "PostgreSQL","MySQL","MongoDB","Cassandra","Azure SQL","Star/Snowflake Schema"
+          ]
+          },
+          {
+          title:"Model Development",
+          icon: Cpu,
+          skills:[
+          "TensorFlow","PyTorch","Scikit-learn","NumPy","Pandas","OpenCV",
+          "Supervised Learning","Unsupervised Learning",
+          "CNNs","Transfer Learning","Multimodal Learning",
+          "Adversarial Training","Model Evaluation",
+          "LLMs","Prompt Engineering","Zero-shot","Few-shot",
+          "Sentiment Analysis","Conversational AI","Chatbot Evaluation"
+          ]
+          },
+          {
+          title:"Validation",
+          icon: BarChart3,
+          skills:[
+          "AUC","EER","GradCAM","Cross Validation",
+          "Model Evaluation","Responsible AI","Regulatory Compliance"
+          ]
+          },
+          {
+          title:"Deployment",
+          icon: Rocket,
+          skills:[
+          "Microsoft Azure","AWS","GCP",
+          "Docker","Kubernetes",
+          "GitHub Actions","Jenkins","CI/CD Pipelines"
+          ]
+          },
+          {
+          title:"Monitoring",
+          icon: HeartPulse,
+          skills:[
+          "Power BI","Tableau",
+          "Drift Detection","Feedback Loops","Operational Metrics",
+          "Git","Linux","Jupyter","VS Code",
+          "Technical Documentation","Research Communication",
+          "Cross-functional Collaboration","Project Presentation"
+          ]
+          }
+          ];
+
+          return (
+
+          <div>
+
+          {/* Diagram */}
+          <div className="flex flex-wrap justify-center gap-14">
+
+          {stages.map((stage,i)=>{
+
+          const isActive = activeStage === stage.title;
+
+          return (
+
+          <motion.div
+          key={i}
+          onMouseEnter={() => setActiveStage(stage.title)}
+          onMouseLeave={() => setActiveStage("Problem Framing")}
+          whileHover={{ scale:1.15 }}
+          className="flex flex-col items-center text-center cursor-pointer"
+          >
+
+          <div
+          className={`
+          w-20 h-20 rounded-full shadow-xl border flex items-center justify-center transition-all duration-300
+          ${isActive
+          ? "bg-slate-900 border-slate-900"
+          : "bg-white border-slate-200 hover:bg-slate-900"}
+          `}
+          >
+
+          <stage.icon
+          className={`
+          w-10 h-10 transition-all duration-300
+          ${isActive ? "text-white" : "text-slate-900 hover:text-white"}
+          `}
+          />
+
+          </div>
+
+          <h4 className={`mt-4 font-semibold transition ${
+          isActive ? "text-slate-900" : "text-slate-500"
+          }`}>
+          {stage.title}
+          </h4>
+
+          </motion.div>
+
+          );
+
+          })}
+
+          </div>
+
+          {/* Skills Reveal */}
+          <motion.div
+          key={activeStage}
+          initial={{ opacity:0, y:20 }}
+          animate={{ opacity:1, y:0 }}
+          transition={{ duration:0.3 }}
+          className="mt-16 text-center"
+          >
+
+          <h3 className="text-xl font-semibold mb-8 text-slate-900">
+          {activeStage} Stack
+          </h3>
+
+          <div className="flex flex-wrap justify-center gap-3 max-w-5xl mx-auto">
+
+          {stages
+          .find(s=>s.title===activeStage)!
+          .skills.map((skill,i)=>(
+
+          <motion.span
+          key={i}
+          initial={{ scale:0 }}
+          animate={{ scale:1 }}
+          transition={{ delay:i*0.025 }}
+          className="
+          px-4 py-2 rounded-full text-xs font-medium
+          bg-slate-100 text-slate-800 border border-slate-200
+          hover:bg-slate-900 hover:text-white
+          transition-all
+          "
+          >
+          {skill}
+          </motion.span>
+
+          ))}
+
+          </div>
+
+          </motion.div>
+
+          </div>
+
+          );
+
+          })()}
+
+          </div>
+
+          </motion.section>
                 {/* Experience — Engineering Career Narrative */}
           <motion.section
             id="experience"
@@ -1308,173 +1478,6 @@ darkNav
 </motion.section>
 
 
-{/* AI Architecture Pipeline */}
-<motion.section
-id="roadmap"
-className="py-32 bg-gradient-to-b from-white to-gray-50"
->
-
-<div className="max-w-7xl mx-auto px-6">
-
-{/* Header */}
-<div className="text-center mb-20">
-<h2 className="text-5xl font-bold text-slate-900 mb-4">
-AI System Architecture
-</h2>
-<p className="text-slate-600">
-Research → Engineering → Production lifecycle
-</p>
-</div>
-
-{(() => {
-
-const stages = [
-{
-title:"Problem Framing",
-icon: Brain,
-skills:[
-"Stakeholder Mapping","ML Objectives","KPIs",
-"AI Ethics","Privacy & Fairness","Human-Centered AI",
-"User Studies","Experimental Design","Quantitative Evaluation"
-]
-},
-{
-title:"Data Engineering",
-icon: Cloud,
-skills:[
-"Python","SQL","R","PySpark",
-"Azure Data Factory","Azure Synapse","Azure Databricks",
-"Apache Airflow","SSIS","Talend",
-"Data Modeling","ETL Automation",
-"PostgreSQL","MySQL","MongoDB","Cassandra","Azure SQL","Star/Snowflake Schema"
-]
-},
-{
-title:"Model Development",
-icon: Cpu,
-skills:[
-"TensorFlow","PyTorch","Scikit-learn","NumPy","Pandas","OpenCV",
-"Supervised Learning","Unsupervised Learning",
-"CNNs","Transfer Learning","Multimodal Learning",
-"Adversarial Training","Model Evaluation",
-"LLMs","Prompt Engineering","Zero-shot","Few-shot",
-"Sentiment Analysis","Conversational AI","Chatbot Evaluation"
-]
-},
-{
-title:"Validation",
-icon: BarChart3,
-skills:[
-"AUC","EER","GradCAM","Cross Validation",
-"Model Evaluation","Responsible AI","Regulatory Compliance"
-]
-},
-{
-title:"Deployment",
-icon: Rocket,
-skills:[
-"Microsoft Azure","AWS","GCP",
-"Docker","Kubernetes",
-"GitHub Actions","Jenkins","CI/CD Pipelines"
-]
-},
-{
-title:"Monitoring",
-icon: HeartPulse,
-skills:[
-"Power BI","Tableau",
-"Drift Detection","Feedback Loops","Operational Metrics",
-"Git","Linux","Jupyter","VS Code",
-"Technical Documentation","Research Communication",
-"Cross-functional Collaboration","Project Presentation"
-]
-}
-];
-
-return (
-
-<div>
-
-{/* Diagram */}
-<div className="flex flex-wrap justify-center gap-14">
-
-{stages.map((stage,i)=>(
-<motion.div
-key={i}
-onMouseEnter={()=>setActiveStage(stage.title)}
-onMouseLeave={()=>setActiveStage(null)}
-whileHover={{ scale:1.15 }}
-className="flex flex-col items-center text-center cursor-pointer group"
->
-
-<div className="w-20 h-20 rounded-full bg-white shadow-xl border border-slate-200 flex items-center justify-center group-hover:bg-slate-900 transition">
-
-<stage.icon className="w-10 h-10 text-slate-900 group-hover:text-white transition"/>
-
-</div>
-
-<h4 className="mt-4 font-semibold text-slate-900">
-{stage.title}
-</h4>
-
-</motion.div>
-))}
-
-</div>
-
-{/* Skills Reveal */}
-{activeStage && (
-
-<motion.div
-initial={{ opacity:0, y:20 }}
-animate={{ opacity:1, y:0 }}
-className="mt-16 text-center"
->
-
-<h3 className="text-xl font-semibold mb-8 text-slate-900">
-{activeStage} Stack
-</h3>
-
-<div className="flex flex-wrap justify-center gap-3 max-w-5xl mx-auto">
-
-{stages
-.find(s=>s.title===activeStage)!
-.skills.map((skill,i)=>(
-
-<motion.span
-key={i}
-initial={{ scale:0 }}
-animate={{ scale:1 }}
-transition={{ delay:i*0.03 }}
-className="
-px-4 py-2 rounded-full text-xs font-medium
-bg-slate-100 text-slate-800 border border-slate-200
-hover:bg-slate-900 hover:text-white
-transition-all
-"
->
-{skill}
-</motion.span>
-
-))}
-
-</div>
-
-</motion.div>
-
-)}
-
-</div>
-
-);
-
-})()}
-
-</div>
-
-</motion.section>
-
-
 
 
 {/* Certifications — Executive Credential Showcase */}
@@ -1665,21 +1668,6 @@ View Certificate →
         </p>
       </div>
 
-      <div>
-        <h4 className="text-sm uppercase tracking-wide text-white/60 mb-4">
-          Navigation
-        </h4>
-
-        <ul className="space-y-2 text-white/70">
-          <li><a href="#home">Home</a></li>
-          <li><a href="#experience">Experience</a></li>
-          <li><a href="#projects">Projects</a></li>
-          <li><a href="#skills">Skills</a></li>
-          <li><a href="#certifications">Certifications</a></li>
-          <li><a href="#interests">Professional Focus</a></li>
-          <li><a href="#contact">Contact</a></li>
-        </ul>
-      </div>
 
       <div>
         <h4 className="text-sm uppercase tracking-wide text-white/60 mb-4">
